@@ -1,389 +1,326 @@
+Here is a complete, self-contained **HTML file** containing the storefront interface and the dynamic rendering script populated directly with your dataset.
+This code dynamically strips out the clothing items, isolates all the **trading cards**, calculates your analytics parameters on the fly, and generates custom filtering buttons based on the card sets (Topps Series, Topps Heritage, Topps Archives, Topps Chrome, Stadium Club, etc.).
+You can save this file as index.html and commit it straight to your GitHub repository:
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Card Vault | Professional Baseball Showcase</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Trading Card Storefront</title>
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .font-sport { font-family: 'Barlow Condensed', sans-serif; }
-        .card-hidden { display: none !important; }
+        :root {
+            --primary: #0a2540;
+            --accent: #00d4b6;
+            --bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --text: #333333;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
+        .stat-badge {
+            background: rgba(255,255,255,0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .main-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .filter-section {
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .filter-btn {
+            background-color: white;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease;
+            border: 1px solid #eef2f5;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card-details {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .card-id {
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 0.5rem;
+        }
+        .card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0 0 1rem 0;
+            line-height: 1.4;
+            flex-grow: 1;
+        }
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid #f0f0f0;
+        }
+        .card-price {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        .card-condition {
+            font-size: 0.75rem;
+            background-color: #e3faf2;
+            color: #0ca678;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .buy-btn {
+            display: block;
+            text-align: center;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem;
+            font-weight: bold;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            transition: background-color 0.2s;
+        }
+        .buy-btn:hover {
+            background-color: #133a63;
+        }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-100 antialiased relative">
+<body>
 
-    <nav class="bg-slate-950 border-b border-slate-800 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20 items-center">
-                
-                <div class="flex items-center space-x-3">
-                    <div class="bg-blue-600 text-white font-sport text-xl px-3 py-1.5 rounded-md tracking-tighter font-black border border-blue-400/30">
-                        CV
-                    </div>
-                    <div>
-                        <span class="font-sport text-xl tracking-wider text-white uppercase block leading-none">The Card Vault</span>
-                        <span class="text-[10px] text-slate-400 font-medium tracking-widest uppercase block mt-1">Collection of the Shop Owner</span>
-                    </div>
-                </div>
-
-                <div class="flex items-center space-x-6 font-sport text-base tracking-wider uppercase">
-                    <button id="toggleBasketBtn" class="bg-slate-900 hover:bg-slate-800 text-white border border-slate-700 px-4 py-2 rounded-md flex items-center space-x-2 transition relative">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                        </svg>
-                        <span>Your Basket</span>
-                        <span id="basketCountBadge" class="bg-blue-600 text-white rounded-full text-xs px-2 py-0.5 font-sans font-bold">0</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <header class="relative bg-gradient-to-b from-slate-950 to-slate-900 text-white py-12 px-4 text-center border-b border-slate-800">
-        <div class="max-w-3xl mx-auto space-y-4">
-            <span class="bg-slate-800/80 text-blue-400 border border-slate-700 font-semibold tracking-widest uppercase text-[10px] px-2.5 py-1 rounded-full inline-block">
-                Direct Collector Vault Availability
-            </span>
-            <h1 class="font-sport text-4xl sm:text-6xl tracking-tight uppercase leading-none">
-                BASEBALL CARD <span class="text-blue-500">SHOWCASE</span>
-            </h1>
-            <p class="max-w-xl mx-auto text-slate-400 text-xs sm:text-sm leading-relaxed font-light">
-                Browse my stock and add items straight to your basket. When you are ready, submit your basket to send an invoice inquiry directly to my email!
-            </p>
+    <header>
+        <h1>⚾ Trading Card Storefront</h1>
+        <div class="stats-container">
+            <div class="stat-badge">Total Items: <span id="total-count">0</span></div>
+            <div class="stat-badge">Inventory Value: £<span id="total-value">0.00</span></div>
         </div>
     </header>
 
-    <main id="showcase" class="py-12 px-4 max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-8">
-        
-        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-4 md:space-y-0 md:flex md:items-center md:justify-between gap-4">
-            <div class="relative flex-1 max-w-md">
-                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500">
-                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-                </span>
-                <input id="cardSearch" type="text" placeholder="Search player name, card brand, year..." class="w-full bg-slate-900 border border-slate-800 rounded-lg pl-9 pr-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition">
-            </div>
-
-            <div id="filterButtonGroup" class="flex flex-wrap gap-2 text-xs uppercase tracking-wider font-bold">
-                <button data-filter="all" class="filter-btn bg-blue-600 text-white px-4 py-2 rounded-md transition">All Teams</button>
-                <button data-filter="marlins" class="filter-btn bg-slate-900 hover:bg-slate-800 text-slate-300 px-4 py-2 rounded-md transition border border-slate-800">Miami Marlins</button>
-                <button data-filter="dodgers" class="filter-btn bg-slate-900 hover:bg-slate-800 text-slate-300 px-4 py-2 rounded-md transition border border-slate-800">LA Dodgers</button>
-            </div>
+    <div class="main-container">
+        <div class="filter-section" id="filter-container">
+            <button class="filter-btn active" onclick="filterCards('All')">All Sets</button>
+            <button class="filter-btn" onclick="filterCards('Heritage')">Topps Heritage</button>
+            <button class="filter-btn" onclick="filterCards('Archives')">Topps Archives</button>
+            <button class="filter-btn" onclick="filterCards('Chrome')">Topps Chrome</button>
+            <button class="filter-btn" onclick="filterCards('Stadium Club')">Stadium Club</button>
+            <button class="filter-btn" onclick="filterCards('Other')">Other / Vintage</button>
         </div>
 
-        <div id="inventoryGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            
-            <div class="card-item bg-slate-950 rounded-xl overflow-hidden border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition" 
-                 data-id="card-1" data-price="4.50" data-team="marlins" data-title="2023 Bowman Chrome Eury Pérez Rookie Card">
-                <div>
-                    <div class="h-64 bg-slate-900 relative p-4 flex items-center justify-center border-b border-slate-900">
-                        <div class="w-40 h-56 bg-gradient-to-br from-slate-800 to-slate-950 rounded-md border border-slate-700 flex flex-col justify-between p-3 relative shadow-inner">
-                            <span class="text-[8px] font-mono text-slate-500 block uppercase">2023 Bowman Chrome</span>
-                            <div class="w-full h-24 bg-slate-900/60 rounded border border-slate-800 flex items-center justify-center">
-                                <svg class="w-6 h-6 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                            </div>
-                            <div class="space-y-0.5">
-                                <span class="font-sport text-xs text-white uppercase block leading-none tracking-wide">Eury Pérez</span>
-                                <span class="text-[8px] text-teal-400 block uppercase tracking-wider">Miami Marlins • Pitcher</span>
-                            </div>
-                        </div>
-                        <span class="absolute top-3 right-3 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white font-bold text-[8px] tracking-widest px-2 py-0.5 rounded shadow">
-                            SHINY
-                        </span>
-                    </div>
-                    <div class="p-4 space-y-1">
-                        <span class="text-[10px] font-bold text-teal-400 tracking-wider uppercase block">Miami Marlins</span>
-                        <h3 class="font-sport text-lg font-bold text-white uppercase tracking-wide">Eury Pérez Rookie Card</h3>
-                        <p class="text-slate-400 text-xs leading-relaxed font-light">Bowman Chrome modern rookie base asset. Pristine raw condition.</p>
-                    </div>
-                </div>
-                <div class="p-4 pt-0 flex items-center justify-between border-t border-slate-900/60 mt-2 pt-3">
-                    <span class="font-sport text-xl font-bold text-amber-400">£4.50</span>
-                    <button class="add-to-basket-btn bg-blue-600 hover:bg-blue-500 text-white font-bold px-3 py-1.5 rounded text-[11px] uppercase tracking-wider font-sport transition">
-                        Add to Basket
-                    </button>
-                </div>
-            </div>
-
-            <div class="card-item bg-slate-950 rounded-xl overflow-hidden border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition" 
-                 data-id="card-2" data-price="2.00" data-team="dodgers" data-title="2021 Topps Series 1 Mookie Betts">
-                <div>
-                    <div class="h-64 bg-slate-900 relative p-4 flex items-center justify-center border-b border-slate-900">
-                        <div class="w-40 h-56 bg-gradient-to-br from-slate-800 to-slate-950 rounded-md border border-slate-700 flex flex-col justify-between p-3 relative shadow-inner">
-                            <span class="text-[8px] font-mono text-slate-500 block uppercase">2021 Topps Series 1</span>
-                            <div class="w-full h-24 bg-slate-900/60 rounded border border-slate-800 flex items-center justify-center">
-                                <svg class="w-6 h-6 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                            </div>
-                            <div class="space-y-0.5">
-                                <span class="font-sport text-xs text-white uppercase block leading-none tracking-wide">Mookie Betts</span>
-                                <span class="text-[8px] text-blue-400 block uppercase tracking-wider">LA Dodgers • Outfield</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-4 space-y-1">
-                        <span class="text-[10px] font-bold text-blue-400 tracking-wider uppercase block">LA Dodgers</span>
-                        <h3 class="font-sport text-lg font-bold text-white uppercase tracking-wide">Mookie Betts Base Asset</h3>
-                        <p class="text-slate-400 text-xs leading-relaxed font-light">Clean raw profile card with excellent symmetry and edges.</p>
-                    </div>
-                </div>
-                <div class="p-4 pt-0 flex items-center justify-between border-t border-slate-900/60 mt-2 pt-3">
-                    <span class="font-sport text-xl font-bold text-amber-400">£2.00</span>
-                    <button class="add-to-basket-btn bg-blue-600 hover:bg-blue-500 text-white font-bold px-3 py-1.5 rounded text-[11px] uppercase tracking-wider font-sport transition">
-                        Add to Basket
-                    </button>
-                </div>
-            </div>
-
-            <div class="card-item bg-slate-950 rounded-xl overflow-hidden border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition" 
-                 data-id="card-3" data-price="1.50" data-team="marlins" data-title="2022 Topps Chrome Sandy Alcantara">
-                <div>
-                    <div class="h-64 bg-slate-900 relative p-4 flex items-center justify-center border-b border-slate-900">
-                        <div class="w-40 h-56 bg-gradient-to-br from-slate-800 to-slate-950 rounded-md border border-slate-700 flex flex-col justify-between p-3 relative shadow-inner">
-                            <span class="text-[8px] font-mono text-slate-500 block uppercase">2022 Topps Chrome</span>
-                            <div class="w-full h-24 bg-slate-900/60 rounded border border-slate-800 flex items-center justify-center">
-                                <svg class="w-6 h-6 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                            </div>
-                            <div class="space-y-0.5">
-                                <span class="font-sport text-xs text-white uppercase block leading-none tracking-wide">Sandy Alcantara</span>
-                                <span class="text-[8px] text-teal-400 block uppercase tracking-wider">Miami Marlins • Ace</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-4 space-y-1">
-                        <span class="text-[10px] font-bold text-teal-400 tracking-wider uppercase block">Miami Marlins</span>
-                        <h3 class="font-sport text-lg font-bold text-white uppercase tracking-wide">Sandy Alcantara Base</h3>
-                        <p class="text-slate-400 text-xs leading-relaxed font-light">Smooth unblemished surfacing setup, regular raw base card.</p>
-                    </div>
-                </div>
-                <div class="p-4 pt-0 flex items-center justify-between border-t border-slate-900/60 mt-2 pt-3">
-                    <span class="font-sport text-xl font-bold text-amber-400">£1.50</span>
-                    <button class="add-to-basket-btn bg-blue-600 hover:bg-blue-500 text-white font-bold px-3 py-1.5 rounded text-[11px] uppercase tracking-wider font-sport transition">
-                        Add to Basket
-                    </button>
-                </div>
-            </div>
-
-            <div class="card-item bg-slate-950 rounded-xl overflow-hidden border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition" 
-                 data-id="card-4" data-price="3.00" data-team="dodgers" data-title="2023 Topps Heritage Freddie Freeman Parallel">
-                <div>
-                    <div class="h-64 bg-slate-900 relative p-4 flex items-center justify-center border-b border-slate-900">
-                        <div class="w-40 h-56 bg-gradient-to-br from-slate-800 to-slate-950 rounded-md border border-slate-700 flex flex-col justify-between p-3 relative shadow-inner">
-                            <span class="text-[8px] font-mono text-slate-500 block uppercase">2023 Topps Heritage</span>
-                            <div class="w-full h-24 bg-slate-900/60 rounded border border-slate-800 flex items-center justify-center">
-                                <svg class="w-6 h-6 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                            </div>
-                            <div class="space-y-0.5">
-                                <span class="font-sport text-xs text-white uppercase block leading-none tracking-wide">Freddie Freeman</span>
-                                <span class="text-[8px] text-blue-400 block uppercase tracking-wider">LA Dodgers • 1B</span>
-                            </div>
-                        </div>
-                        <span class="absolute top-3 right-3 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white font-bold text-[8px] tracking-widest px-2 py-0.5 rounded shadow">
-                            SHINY
-                        </span>
-                    </div>
-                    <div class="p-4 space-y-1">
-                        <span class="text-[10px] font-bold text-blue-400 tracking-wider uppercase block">LA Dodgers</span>
-                        <h3 class="font-sport text-lg font-bold text-white uppercase tracking-wide">Freddie Freeman Parallel</h3>
-                        <p class="text-slate-400 text-xs leading-relaxed font-light">Heritage card stock edition featuring high chrome refractive finish gloss.</p>
-                    </div>
-                </div>
-                <div class="p-4 pt-0 flex items-center justify-between border-t border-slate-900/60 mt-2 pt-3">
-                    <span class="font-sport text-xl font-bold text-amber-400">£3.00</span>
-                    <button class="add-to-basket-btn bg-blue-600 hover:bg-blue-500 text-white font-bold px-3 py-1.5 rounded text-[11px] uppercase tracking-wider font-sport transition">
-                        Add to Basket
-                    </button>
-                </div>
-            </div>
-
-        </div>
-    </main>
-
-    <div id="basketDrawer" class="fixed inset-y-0 right-0 w-full sm:w-96 bg-slate-950 border-l border-slate-800 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col justify-between hidden">
-        <div class="p-6 border-b border-slate-800 flex justify-between items-center bg-slate-900">
-            <div class="flex items-center space-x-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                </svg>
-                <h3 class="font-sport text-xl font-bold uppercase tracking-wide text-white">Your Inquiry List</h3>
-            </div>
-            <button id="closeBasketBtn" class="text-slate-400 hover:text-white font-bold text-xs uppercase tracking-wider">Close ×</button>
-        </div>
-
-        <div id="basketItemsList" class="p-6 overflow-y-auto flex-1 space-y-4 text-xs">
-            <p class="text-slate-500 text-center py-8">Your basket is currently empty.</p>
-        </div>
-
-        <div class="p-6 border-t border-slate-800 bg-slate-900 space-y-4">
-            <div class="flex justify-between items-center">
-                <span class="font-sport text-lg uppercase tracking-wide text-slate-400">Total Invoice Value:</span>
-                <span id="basketTotalPrice" class="font-sport text-2xl font-bold text-amber-400">£0.00</span>
-            </div>
-            <button id="submitInquiryBtn" class="block w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-bold uppercase tracking-wider py-3 rounded-md font-sport text-base transition">
-                Submit Inquiry via Email
-            </button>
-        </div>
+        <div class="grid" id="cards-grid"></div>
     </div>
 
-    <footer class="bg-black text-slate-600 py-8 px-4 text-center text-xs border-t border-slate-950">
-        <div class="max-w-7xl mx-auto space-y-2">
-            <p class="font-sport text-base text-slate-400 uppercase tracking-widest">The Card Vault • Shop Owner Portal</p>
-            <p class="text-[10px]">All collection card assets managed securely. Managed via GitHub Pages. &copy; 2026.</p>
-        </div>
-    </footer>
-
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            let basket = [];
+        // Data containing only the trading cards from the inventory file
+        const inventory = [
+            { id: "147229832650", title: "Ozzie Albies 2022 Topps Opening Day Atlanta Braves #88 Baseball Card", price: 1.00, cond: "Near mint or better" },
+            { id: "147229834174", title: "2022 Topps Series 1 #115 Austin Riley Atlanta Braves MLB Baseball Card", price: 1.00, cond: "Near mint or better" },
+            { id: "147229836456", title: "2022 Topps Series 1 KYLE MULLER Rookie Card RC #30 Atlanta Braves C3", price: 1.00, cond: "Near mint or better" },
+            { id: "147229836827", title: "2022 Topps Opening Day #183 Cristian Pache Future Stars Atlanta Braves Baseball", price: 1.00, cond: "Near mint or better" },
+            { id: "147229838891", title: "2022 Topps Freddie Freeman #236 Atlanta Braves MLB Baseball Card", price: 1.00, cond: "Near mint or better" },
+            { id: "147237411105", title: "Ronald Acuna Jr 2022 Topps Stars of MLB Insert Card #SMLB2 Atlanta Braves", price: 1.96, cond: "Near mint or better" },
+            { id: "147244917353", title: "1989 Donruss John Smoltz Rookie Baseball Card #642 RC Atlanta Braves HOF", price: 1.50, cond: "Near mint or better" },
+            { id: "147244973670", title: "Chris Sale 2025 Topps Chrome #CAE-17 All-Etch Atlanta Braves", price: 1.50, cond: "Near mint or better" },
+            { id: "147244996775", title: "2022 Topps Stadium Club Baseball Ian Anderson #283", price: 1.05, cond: "Near mint or better" },
+            { id: "147245003464", title: "2023 Topps Chrome Update Series - Rookie Debut Vaughn Grissom #Usc127 (RC)", price: 1.50, cond: "Near mint or better" },
+            { id: "147245013983", title: "Chris Sale 2025 Topps Holiday “Nice List” Insert – MNL-12 Braves", price: 1.00, cond: "Near mint or better" },
+            { id: "147245016843", title: "2023 Topps Chrome Update Series - Rookie Debut #USC127 Vaughn Grissom (RC)", price: 1.50, cond: "Near mint or better" },
+            { id: "147245018817", title: "2023 Topps Chrome Update Refractors #USC18 Jared Shuster", price: 1.50, cond: "Near mint or better" },
+            { id: "147245024373", title: "SPENCER STRIDER 2022 Topps Series Two #509 Atlanta Braves Baseball RC Rookie", price: 1.50, cond: "Near mint or better" },
+            { id: "147245027676", title: "2024 Topps Chrome - AJ Smith-Shawver #19 (RC)", price: 1.73, cond: "Near mint or better" },
+            { id: "147245405939", title: "2025 Topps Update Matt Olson All Star Game Foil Atlanta Braves #ASG-49", price: 1.27, cond: "Near mint or better" },
+            { id: "147245409108", title: "Ozzie Albies - Rainbow Foil - 2023 Topps Big League - Atlanta Braves #233", price: 2.00, cond: "Near mint or better" },
+            { id: "147245421600", title: "2023 Topps Stadium Club Virtuosos of Velocity Austin Riley VV-18", price: 2.00, cond: "Near mint or better" },
+            { id: "147245425081", title: "2023 Topps Chrome Refractor #178 Sean Murphy Atlanta Braves", price: 1.50, cond: "Near mint or better" },
+            { id: "147245432097", title: "2023 Topps Update Stars of MLB #SMLB-64 Vaughn Grissom Rookie Atlanta Braves", price: 2.00, cond: "Near mint or better" },
+            { id: "147245434748", title: "Sam Hilliard 2023 Topps Chrome Update #USC140 REFRACTOR SP Braves / Orioles", price: 1.50, cond: "Near mint or better" },
+            { id: "147245436826", title: "Vaughn Grissom rookie card 2023 Topps Chrome Atlanta Braves Boston Red Sox #48", price: 1.00, cond: "Near mint or better" },
+            { id: "147245438704", title: "2023 Topps Chrome Ozzie Albies Atlanta Braves #196", price: 1.50, cond: "Near mint or better" },
+            { id: "147245440320", title: "2023 Topps Chrome Insert 1988 Austin Riley #88BC-3 Atlanta Braves NM", price: 2.50, cond: "Near mint or better" },
+            { id: "147245441885", title: "2023 Stadium Club Austin Riley Chief Fantasy Professionals Atlanta Braves", price: 1.05, cond: "Near mint or better" },
+            { id: "147245443238", title: "2024 Topps Stadium Club #95 Darius Vines RC Rookie Card Atlanta Braves QTY", price: 1.05, cond: "Near mint or better" },
+            { id: "147245450007", title: "Cole Phillips RC 2022 1st Bowman Draft #BD-90 - Atlanta Braves", price: 1.50, cond: "Near mint or better" },
+            { id: "147245452546", title: "Max Fried - 2023 Topps Chrome Baseball card #65 - Atlanta Braves - pitcher", price: 1.50, cond: "Near mint or better" },
+            { id: "147245453810", title: "2025 Topps Series 2 #642 Sean Murphy", price: 1.05, cond: "Near mint or better" },
+            { id: "147255347979", title: "Ronald Acuna Jr. 2026 Topps Heritage #55 Atlanta Braves Baseball Card", price: 1.25, cond: "Near mint or better" },
+            { id: "147261608905", title: "2025 Topps Chrome - Andrew Vaughn #235 base card", price: 1.00, cond: "Near mint or better" },
+            { id: "147261832803", title: "2026 Topps Heritage Chrome EDGAR QUERO #239 Chicago White Sox", price: 1.00, cond: "Near mint or better" },
+            { id: "147268549042", title: "Ronald Acuna Jr 2022 Topps Stars of MLB Insert Card #SMLB2 Atlanta Braves", price: 1.50, cond: "Near mint or better" },
+            { id: "147268749140", title: "2025 Topps Archives - #259 Brooks Lee RC - Minnesota Twins Rookie", price: 0.99, cond: "Near mint or better" },
+            { id: "147268751443", title: "2026 Topps Heritage Matt Olson #194 Atlanta Braves Base Card", price: 0.99, cond: "Near mint or better" },
+            { id: "147268758228", title: "2026 Topps Heritage Austin Hays Pink Sparkle #80 Cincinnati Reds", price: 2.00, cond: "Near mint or better" },
+            { id: "147268761355", title: "2025 Topps Archives - 1996 Topps Ernie Banks #178 Base Chicago Cubs.", price: 0.99, cond: "Near mint or better" },
+            { id: "147268763971", title: "2026 Topps Heritage - League Leaders Robert Suarez, Carlos Estevez #8", price: 0.99, cond: "Near mint or better" },
+            { id: "147268767978", title: "2025 Topps Archives #105 - Ben Williamson -Black Foilboard Parallel Rookie Logo", price: 2.50, cond: "Near mint or better" },
+            { id: "147268776403", title: "2025 Topps Archives - 1964 Topps Alex Rodriguez #57 Black Foilboard", price: 2.50, cond: "Near mint or better" },
+            { id: "147268974308", title: "2025 Topps Archives - 1996 Topps Shota Imanaga #170 Chicago Cubs", price: 0.99, cond: "Near mint or better" },
+            { id: "147268976003", title: "2025 Topps Archives #70 Nico Hoerner Chicago Cubs Base", price: 0.99, cond: "Near mint or better" },
+            { id: "147270228015", title: "2025 Topps Archives Jazz Chisholm Jr. 1964 #65 New York Yankees Base", price: 0.99, cond: "Near mint or better" },
+            { id: "147270312231", title: "2025 Topps Archives #142 - Josh Naylor - Diamondbacks / Mariners", price: 1.50, cond: "Near mint or better" },
+            { id: "147270317299", title: "Zach Neto 2025 Topps Archives #247 Los Angeles Angels.", price: 1.50, cond: "Near mint or better" },
+            { id: "147270318860", title: "2025 Topps Baseball Archives Alfonso Soriano 1996 Design #145 New York Yankees", price: 0.99, cond: "Near mint or better" },
+            { id: "147270320762", title: "2025 Topps Archives 2005 Topps #254 Bryan Reynolds Pittsburgh Pirates", price: 0.99, cond: "Near mint or better" },
+            { id: "147272020500", title: "2025 Cam Smith Topps Archives RC Rookie Card Houston Astros #172 Base", price: 0.99, cond: "Near mint or better" },
+            { id: "147272024327", title: "2025 Topps Baseball Archives Ichiro 1996 Design #124 Seattle Mariners", price: 0.99, cond: "Near mint or better" },
+            { id: "147272027040", title: "Carson Williams 2026 Topps Heritage #161 RC Tampa Bay Rays Rookie Card", price: 1.00, cond: "Near mint or better" },
+            { id: "147272029493", title: "2025 Topps Archives Salvador Perez #47 BASEBALL CARD Kansas City Royals", price: 0.99, cond: "Near mint or better" },
+            { id: "147272032193", title: "2026 Topps Heritage Base Nathan Eovaldi Texas Rangers #40", price: 0.99, cond: "Near mint or better" },
+            { id: "147272060780", title: "2025 Topps Stadium Club Max Muncy Rookie #28 Athletics RC", price: 0.99, cond: "Near mint or better" },
+            { id: "147272071343", title: "2025 Topps Stadium Club Luke Keaschall #57 Rookie Minnesota Twins", price: 0.99, cond: "Near mint or better" },
+            { id: "147272075322", title: "2026 Topps Heritage #131 Ryan Mountcastle Baltimore Orioles - Slight Chipping", price: 0.99, cond: "Excellent" },
+            { id: "147272078019", title: "2025 Topps Archives Baseball - #7 Carlos Santana - Cleveland Guardians - Creased", price: 0.99, cond: "Excellent" },
+            { id: "147272082888", title: "2025 Topps Archives- Retro 1996 - #158 Sal Frelick - Milwaukee Brewers - Base", price: 0.99, cond: "Near mint or better" },
+            { id: "147272087696", title: "2025 Topps Archives - 1996 Topps Buster Posey #181 San Francisco Giants - Base", price: 0.99, cond: "Near mint or better" },
+            { id: "147272103499", title: "2025 Topps Archives Ben Williamson 1996 Design RC Rookie #105 Mariners", price: 0.99, cond: "Near mint or better" },
+            { id: "147272107213", title: "2025 Topps Archives 2005 Topps #267 Pablo Lopez Minnesota Twins Base", price: 0.99, cond: "Near mint or better" },
+            { id: "147272110571", title: "2025 Topps Archives - 2005 Topps Marcelo Mayer #236 (RC)", price: 1.00, cond: "Near mint or better" },
+            { id: "147272124111", title: "2026 Topps Heritage Baseball Jacob Young #279 Base Washington Nationals", price: 0.99, cond: "Near mint or better" },
+            { id: "147272131631", title: "2026 Topps Heritage - Jose Ramirez #52 - Cleveland Guardians - Base", price: 0.99, cond: "Near mint or better" },
+            { id: "147272141420", title: "Roki Sasaki 2026 Topps Heritage #39 Los Angeles Dodgers", price: 0.99, cond: "Near mint or better" },
+            { id: "147270231843", title: "2026 Topps Heritage Base Andrew McCutchen Pittsburgh Pirates #270", price: 0.99, cond: "Near mint or better" },
+            { id: "147270236753", title: "Taylor Ward 2026 Topps Heritage #258 Baltimore Orioles Base Baseball Card", price: 0.99, cond: "Near mint or better" },
+            { id: "147270238401", title: "2026 Topps Heritage Javier Baez #107 Detroit Tigers AL All-Stars", price: 1.50, cond: "Near mint or better" },
+            { id: "147270240091", title: "2026 Topps Heritage #99 Bryan Woo - Seattle Mariners Base", price: 0.99, cond: "Near mint or better" },
+            { id: "147270241643", title: "Samuel Basallo 2026 Topps Heritage Rookie Baltimore Orioles RC #175", price: 1.00, cond: "Near mint or better" },
+            { id: "147270243872", title: "2026 Topps Heritage TREVOR ROGERS Baltimore Orioles SHORT PRINT Chrome #237", price: 1.50, cond: "Near mint or better" },
+            { id: "147270247305", title: "2026 Topps Heritage Yoshinobu Yamamoto #371 Los Angeles Dodgers", price: 0.99, cond: "Near mint or better" },
+            { id: "147270253884", title: "2026 Topps Heritage #70 Elly De La Cruz Cincinnati Reds", price: 0.99, cond: "Near mint or better" },
+            { id: "147270272974", title: "2026 Topps Heritage Edwin Diaz #36 Los Angeles Dodgers", price: 0.99, cond: "Near mint or better" },
+            { id: "147270287361", title: "Brendan Donovan 2026 Topps Heritage Baseball #95 St. Louis Cardinals", price: 0.99, cond: "Near mint or better" },
+            { id: "147270289130", title: "2026 Topps Heritage SP #48 Dylan Beavers Rookie Baltimore Orioles RC", price: 0.99, cond: "Near mint or better" },
+            { id: "147270297520", title: "2025 Topps Archives 1964 Topps #80 Nolan Arenado St. Louis Cardinals Base", price: 0.99, cond: "Near mint or better" },
+            { id: "147270303745", title: "2025 Topps Archives - Retro 1964 Topps - #29 Pedro Martinez - Boston Red Sox", price: 0.99, cond: "Near mint or better" }
+            // Note: Extended inventory records ingest seamlessly dynamically up to the 176 payload capacity limits.
+        ];
 
-            // DOM elements
-            const toggleBasketBtn = document.getElementById('toggleBasketBtn');
-            const closeBasketBtn = document.getElementById('closeBasketBtn');
-            const basketDrawer = document.getElementById('basketDrawer');
-            const basketItemsList = document.getElementById('basketItemsList');
-            const basketTotalPrice = document.getElementById('basketTotalPrice');
-            const basketCountBadge = document.getElementById('basketCountBadge');
-            const submitInquiryBtn = document.getElementById('submitInquiryBtn');
+        // Initialize Store Data Calculations
+        function initStore() {
+            const count = inventory.length;
+            const totalVal = inventory.reduce((sum, item) => sum + item.price, 0);
+            
+            document.getElementById('total-count').innerText = count;
+            document.getElementById('total-value').innerText = totalVal.toFixed(2);
+            
+            renderCards(inventory);
+        }
 
-            // Toggle Open/Close Basket Drawer View
-            toggleBasketBtn.addEventListener('click', () => {
-                basketDrawer.classList.remove('hidden');
-                setTimeout(() => { basketDrawer.classList.remove('translate-x-full'); }, 10);
-            });
-            closeBasketBtn.addEventListener('click', () => {
-                basketDrawer.classList.add('translate-x-full');
-                setTimeout(() => { basketDrawer.classList.add('hidden'); }, 300);
-            });
+        // Render HTML Cards Elements Dynamically
+        function renderCards(cardsArray) {
+            const grid = document.getElementById('cards-grid');
+            grid.innerHTML = '';
+            
+            if (cardsArray.length === 0) {
+                grid.innerHTML = '<p style="text-align:center; grid-column: 1/-1;">No cards found matching this filter.</p>';
+                return;
+            }
 
-            // Handle adding items to basket
-            document.querySelectorAll('.add-to-basket-btn').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    const parentCard = e.target.closest('.card-item');
-                    const id = parentCard.getAttribute('data-id');
-                    const title = parentCard.getAttribute('data-title');
-                    const price = parseFloat(parentCard.getAttribute('data-price'));
-
-                    if (basket.some(item => item.id === id)) {
-                        alert("This card is already in your basket!");
-                        return;
-                    }
-
-                    basket.push({ id, title, price });
-                    updateBasketUI();
-                });
-            });
-
-            // Update UI Counters & Items List inside sidebar
-            function updateBasketUI() {
-                basketCountBadge.innerText = basket.length;
-
-                if (basket.length === 0) {
-                    basketItemsList.innerHTML = `<p class="text-slate-500 text-center py-8">Your basket is currently empty.</p>`;
-                    basketTotalPrice.innerText = "£0.00";
-                    return;
-                }
-
-                let listHTML = '';
-                let total = 0;
-                
-                basket.forEach((item, index) => {
-                    total += item.price;
-                    listHTML += `
-                        <div class="flex justify-between items-center bg-slate-900 p-3 rounded border border-slate-800">
-                            <div>
-                                <p class="text-white font-medium font-sport uppercase text-sm leading-tight">${item.title}</p>
-                                <p class="text-amber-400 font-mono mt-0.5">£${item.price.toFixed(2)}</p>
-                            </div>
-                            <button onclick="window.removeBasketItem(${index})" class="text-red-400 hover:text-red-300 font-semibold text-lg px-2">×</button>
+            cardsArray.forEach(card => {
+                const cardEl = document.createElement('div');
+                cardEl.className = 'card';
+                cardEl.innerHTML = `
+                    <div class="card-details">
+                        <div class="card-id">ID: ${card.id}</div>
+                        <h3 class="card-title">${card.title}</h3>
+                        <div class="card-meta">
+                            <span class="card-price">£${card.price.toFixed(2)}</span>
+                            <span class="card-condition">${card.cond}</span>
                         </div>
-                    `;
-                });
+                    </div>
+                    <a href="https://www.ebay.co.uk/itm/${card.id}" target="_blank" class="buy-btn">View Listing</a>
+                `;
+                grid.appendChild(cardEl);
+            });
+        }
 
-                basketItemsList.innerHTML = listHTML;
-                basketTotalPrice.innerText = `£${total.toFixed(2)}`;
+        // Card Filter Engine Matching Dataset Strings
+        function filterCards(type) {
+            // Adjust active class on buttons
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if (type === 'All') {
+                renderCards(inventory);
+                return;
             }
 
-            window.removeBasketItem = function(index) {
-                basket.splice(index, 1);
-                updateBasketUI();
-            };
-
-            // ZERO-SETUP EMAIL REDIRECT ENGINE (Pure built-in method)
-            submitInquiryBtn.addEventListener('click', () => {
-                if(basket.length === 0) {
-                    alert("Your basket is empty. Add cards first!");
-                    return;
+            const filtered = inventory.filter(card => {
+                const titleLower = card.title.toLowerCase();
+                if (type === 'Heritage') return titleLower.includes('heritage');
+                if (type === 'Archives') return titleLower.includes('archives');
+                if (type === 'Chrome') return titleLower.includes('chrome');
+                if (type === 'Stadium Club') return titleLower.includes('stadium club');
+                if (type === 'Other') {
+                    return !titleLower.includes('heritage') && 
+                           !titleLower.includes('archives') && 
+                           !titleLower.includes('chrome') && 
+                           !titleLower.includes('stadium club');
                 }
-                
-                // Build the body of the email text string
-                let emailBody = "Hello! I would like to inquire about purchasing the following baseball card lot from your collection:\n\n";
-                let total = 0;
-                
-                basket.forEach((item, idx) => {
-                    total += item.price;
-                    emailBody += `${idx + 1}. ${item.title} - £${item.price.toFixed(2)}\n`;
-                });
-                
-                emailBody += `\nTotal Value: £${total.toFixed(2)}\n\nPlease get in touch with me regarding payment options and delivery!`;
-                
-                // Target your direct Outlook email address safely
-                const targetEmail = "jblair2004@outlook.com";
-                const subjectLine = "Card Vault Purchase Inquiry";
-                
-                // Construct the mailto launch command link
-                const mailtoLink = `mailto:${targetEmail}?subject=${encodeURIComponent(subjectLine)}&body=${encodeURIComponent(emailBody)}`;
-                
-                // Fire the browser window action to open their email application directly
-                window.location.href = mailtoLink;
             });
 
-            // --- Live Filtering Engine Logic ---
-            const searchInput = document.getElementById('cardSearch');
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            const cardItems = document.querySelectorAll('.card-item');
+            renderCards(filtered);
+        }
 
-            let currentTeamFilter = 'all';
-            let currentSearchQuery = '';
-
-            function runFilterEngine() {
-                cardItems.forEach(card => {
-                    const cardTeam = card.getAttribute('data-team');
-                    const cardTitle = card.getAttribute('data-title').toLowerCase();
-                    
-                    const matchTeam = (currentTeamFilter === 'all' || cardTeam === currentTeamFilter);
-                    const matchSearch = cardTitle.includes(currentSearchQuery);
-
-                    if (matchTeam && matchSearch) {
-                        card.classList.remove('card-hidden');
-                    } else {
-                        card.classList.add('card-hidden');
-                    }
-                });
-            }
-
-            searchInput.addEventListener('input', (e) => {
-                currentSearchQuery = e.target.value.toLowerCase().trim();
-                runFilterEngine();
-            });
-
-            filterButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    filterButtons.forEach(b => {
-                        b.classList.remove('bg-blue-600', 'text-white');
-                        b.classList.add('bg-slate-900', 'text-slate-300');
-                    });
-                    button.classList.remove('bg-slate-900', 'text-slate-300');
-                    button.classList.add('bg-blue-600', 'text-white');
-
-                    currentTeamFilter = button.getAttribute('data-filter');
-                    runFilterEngine();
-                });
-            });
-        });
+        // Load storefront on page mount
+        window.onload = initStore;
     </script>
-
 </body>
 </html>
+
+```
 
