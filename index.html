@@ -1,346 +1,275 @@
-To add the 5 signature flavors, we can build a clean, interactive product selector row right where your **"Five flavours. One unmistakable crunch."** section sits.
-In real life, Scotts offers: **The Original (Classic), Steak Flavoured, Salt & Chilli, Tatyo Cheese & Onion collab (or Smoky Bacon), and Gluten-Free variants**.
-Here is the updated, full single-file HTML. I've added a responsive, 5-column grid featuring individual product cards complete with high-quality stock imagery, tailored flavor tags, and brief descriptions for each option:
+Let's shift gears! Moving from onions to baseball cards is a classic pivot. A custom website is perfect for displaying your card collection, highlighting conditions, and attracting collectors without paying heavy marketplace seller fees.
+Since we are building a sports card storefront/portfolio site, the layout needs to feel clean, high-end, and trust-inspiring. It should feature a high-impact header, clear grade/condition badges (like PSA/BGS styling), filter options, and direct inquiry actions.
+Here is the **complete, production-ready HTML code** for your new custom Baseball Card Showcase website. It is fully responsive, styled with Tailwind CSS, and ready to be uploaded straight to your GitHub repository as an index.html file.
 ```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scotts Crispy Onions | No Ordinary Onions</title>
+    <title>Gourmet Card Co. | Premium Baseball Card Collection</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
         }
-        .heading-brand {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 900;
+        .font-sport {
+            font-family: 'Barlow Condensed', sans-serif;
         }
     </style>
 </head>
-<body class="bg-white text-slate-900 antialiased">
+<body class="bg-slate-900 text-slate-100 antialiased">
 
-    <nav class="bg-white border-b border-slate-100 sticky top-0 z-50">
+    <nav class="bg-slate-950 border-b border-slate-800 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 items-center">
-                <div class="flex items-center space-x-2">
-                    <span class="inline-block w-2.5 h-2.5 rounded-full bg-amber-500"></span>
-                    <span class="heading-brand text-lg tracking-wider text-black uppercase">Scotts <span class="text-slate-400 font-light text-base hover:text-slate-600 transition ml-1">•</span> Crispy Onions</span>
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-amber-500 text-slate-950 font-black p-2.5 rounded-lg font-sport text-xl tracking-tight leading-none">
+                        GC
+                    </div>
+                    <span class="font-sport text-2xl tracking-wider text-white uppercase">Gourmet <span class="text-amber-500">Cards</span></span>
                 </div>
-                <div class="flex items-center">
-                    <button class="text-slate-900 focus:outline-none">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                    </button>
+                <div class="hidden md:flex space-x-8 font-sport text-lg tracking-wide uppercase">
+                    <a href="#showcase" class="text-amber-500 transition">The Showcase</a>
+                    <a href="#about" class="text-slate-400 hover:text-white transition">Grading Standard</a>
+                    <a href="#contact" class="text-slate-400 hover:text-white transition">Inquire</a>
+                </div>
+                <div>
+                    <a href="#contact" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-5 py-2.5 rounded font-sport text-lg uppercase tracking-wide transition shadow-md">
+                        Make an Offer
+                    </a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <section class="py-8 px-4 max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="space-y-4 mb-6">
-            <div class="flex items-center space-x-4">
-                <div class="w-12 h-[2px] bg-amber-500"></div>
-                <span class="text-xs font-bold tracking-widest text-slate-500 uppercase">Crafted in Coleraine • Since 2011</span>
-            </div>
-            <h1 class="heading-brand text-5xl sm:text-6xl tracking-tight text-slate-900 leading-none">
-                No Ordinary <br><span class="relative inline-block">Onions<span class="absolute left-0 bottom-1 w-full h-2 bg-amber-100 -z-10"></span><span class="text-amber-500">.</span></span>
+    <header class="relative bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-black text-white py-20 px-4 text-center border-b border-slate-800">
+        <div class="max-w-4xl mx-auto space-y-6">
+            <span class="bg-slate-800/80 text-amber-400 border border-slate-700 font-semibold tracking-widest uppercase text-xs px-3 py-1.5 rounded-full inline-block">
+                Personal Collection Sale • 2026 Update
+            </span>
+            <h1 class="font-sport text-6xl sm:text-8xl tracking-tight uppercase leading-none text-white">
+                VINTAGE ICONIC <br><span class="text-amber-500">BASEBALL CARDS</span>
             </h1>
-            <p class="text-slate-600 text-base max-w-xl leading-relaxed pt-2">
-                The ultimate crunch for burgers, steaks, salads and everything in between. Family-owned, locally sourced and fried to crisp perfection — so it stays crunchy to the very last bite.
+            <p class="max-w-xl mx-auto text-slate-400 text-base sm:text-lg leading-relaxed font-light">
+                A curated vault of high-grade rookies, rare parallels, and timeless hall-of-famers. Securely maintained, accurately described, and open for serious collector offers.
             </p>
-        </div>
-
-        <div class="space-y-3 max-w-md my-8">
-            <a href="#range" class="block w-full text-center bg-white border-2 border-slate-900 text-slate-900 font-bold py-3.5 px-4 rounded hover:bg-slate-50 transition text-sm flex items-center justify-center space-x-2">
-                <span>View the 5 Flavours</span>
-                <span>↓</span>
-            </a>
-            <a href="#wholesale" class="block w-full text-center bg-amber-400 text-slate-900 font-bold py-3.5 px-4 rounded hover:bg-amber-500 transition text-sm flex items-center justify-center space-x-2">
-                <span>Wholesale & Trade</span>
-                <span>→</span>
-            </a>
-        </div>
-
-        <span class="text-xs font-semibold text-slate-400 flex items-center mb-3">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-            96 Moneybrannon Rd, Coleraine — open today
-        </span>
-
-        <div class="relative rounded-lg overflow-hidden shadow-sm border border-slate-100 max-w-md">
-            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80" alt="Crispy onions piled high over a juicy premium steak meat entry" class="w-full h-80 object-cover">
-            <div class="absolute top-4 left-4 bg-white px-3 py-1 rounded shadow-sm flex items-center space-x-1.5">
-                <span class="w-2 h-2 rounded-full bg-amber-500"></span>
-                <span class="text-[10px] font-bold tracking-widest text-slate-700 uppercase">Trade Supply UK & IE</span>
-            </div>
-            <div class="absolute bottom-0 left-0 right-0 bg-white p-5 m-3 rounded-md shadow-lg">
-                <span class="text-[10px] font-bold tracking-wider text-slate-400 uppercase block mb-1">Best Paired With</span>
-                <h3 class="heading-brand text-2xl text-slate-950 font-bold">Steak • Burgers • Salads</h3>
-            </div>
-        </div>
-    </section>
-
-    <section class="border-y border-slate-100 bg-slate-50 grid grid-cols-2 divide-x divide-y divide-slate-200 text-left">
-        <div class="p-6 space-y-1">
-            <span class="heading-brand text-3xl font-extrabold text-slate-900 block">2011</span>
-            <span class="text-[10px] font-bold tracking-widest text-slate-500 uppercase block">Family-Owned Since</span>
-        </div>
-        <div class="p-6 space-y-1">
-            <span class="heading-brand text-3xl font-extrabold text-slate-900 block">5</span>
-            <span class="text-[10px] font-bold tracking-widest text-slate-500 uppercase block">Signature Flavours</span>
-        </div>
-        <div class="p-6 space-y-1">
-            <span class="heading-brand text-3xl font-extrabold text-slate-900 block">100%</span>
-            <span class="text-[10px] font-bold tracking-widest text-slate-500 uppercase block">Made in Coleraine</span>
-        </div>
-        <div class="p-6 space-y-1">
-            <span class="heading-brand text-3xl font-extrabold text-slate-900 block">UK & IE</span>
-            <span class="text-[10px] font-bold tracking-widest text-slate-500 uppercase block">Trade Supply</span>
-        </div>
-    </section>
-
-    <section class="py-16 px-4 max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-12">
-        <div class="space-y-4">
-            <div class="flex items-center space-x-4">
-                <div class="w-12 h-[2px] bg-amber-500"></div>
-                <span class="text-xs font-bold tracking-widest text-slate-500 uppercase">The Secret to the Crunch</span>
-            </div>
-            <h2 class="heading-brand text-4xl font-extrabold text-slate-900 tracking-tight leading-none">
-                We don't just slice onions. <br><span class="text-amber-400">We perfect them.</span>
-            </h2>
-            <p class="text-slate-600 text-sm leading-relaxed max-w-prose">
-                Locally sourced, perfectly seasoned and fried to a deep golden crunch in small batches. Each tub leaves Coleraine with the same standard the family has held since day one.
-            </p>
-        </div>
-
-        <div class="space-y-10 max-w-md">
-            <div class="border border-slate-100 bg-white p-6 rounded-xl shadow-sm relative pt-12">
-                <span class="heading-brand text-6xl text-amber-100/70 font-black absolute top-2 left-4 select-none">01</span>
-                <h4 class="heading-brand text-xl font-bold text-slate-900 mb-2">Versatile Topping</h4>
-                <p class="text-slate-600 text-xs leading-relaxed">
-                    Burgers, BBQs, Sunday roasts, stir-fries, salads — or straight out of the tub. There's no wrong way to crunch.
-                </p>
-            </div>
-
-            <div class="border border-slate-100 bg-white p-6 rounded-xl shadow-sm relative pt-12">
-                <span class="heading-brand text-6xl text-amber-100/70 font-black absolute top-2 left-4 select-none">02</span>
-                <h4 class="heading-brand text-xl font-bold text-slate-900 mb-2">Gluten-Free Range</h4>
-                <p class="text-slate-600 text-xs leading-relaxed">
-                    Selected flavours are proudly gluten-free, so everyone gets to share the crunch.
-                </p>
-            </div>
-
-            <div class="border border-slate-100 bg-white p-6 rounded-xl shadow-sm relative pt-12">
-                <span class="heading-brand text-6xl text-amber-100/70 font-black absolute top-2 left-4 select-none">03</span>
-                <h4 class="heading-brand text-xl font-bold text-slate-900 mb-2">Locally Produced</h4>
-                <p class="text-slate-600 text-xs leading-relaxed">
-                    Hand-crafted at 96 Moneybrannon Rd, Coleraine. Family owned and run since 2011.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <section id="range" class="py-16 bg-slate-50 border-y border-slate-100 px-4">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="space-y-3 mb-10">
-                <div class="w-12 h-[2px] bg-amber-500"></div>
-                <span class="text-xs font-bold tracking-widest text-slate-500 uppercase block">Our Flavour Range</span>
-                <h2 class="heading-brand text-4xl font-extrabold text-slate-900 tracking-tight leading-none">
-                    Five flavours. <br>One unmistakable crunch.
-                </h2>
-                <p class="text-slate-500 text-xs">
-                    Available in retail tubs and food-service catering bulk packs. Find your signature taste profile.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-                
-                <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 flex flex-col justify-between">
-                    <div>
-                        <div class="h-44 bg-slate-100 relative">
-                            <img src="https://images.unsplash.com/photo-1626132647523-66f5bf380027?auto=format&fit=crop&w=400&q=80" alt="The Original" class="w-full h-full object-cover">
-                            <span class="absolute top-2 left-2 bg-slate-900 text-white font-bold tracking-wider text-[9px] px-2 py-0.5 rounded uppercase">The Icon</span>
-                        </div>
-                        <div class="p-4 space-y-1">
-                            <h3 class="heading-brand text-lg text-slate-900">The Original</h3>
-                            <p class="text-slate-500 text-xs leading-relaxed">The classic golden crunch. Lightly seasoned to emphasize natural sweet savory onion flavor.</p>
-                        </div>
-                    </div>
-                    <div class="p-4 pt-0 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Classic Blend</div>
-                </div>
-
-                <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 flex flex-col justify-between">
-                    <div>
-                        <div class="h-44 bg-slate-100 relative">
-                            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=400&q=80" alt="Steak Flavoured" class="w-full h-full object-cover">
-                            <span class="absolute top-2 left-2 bg-red-600 text-white font-bold tracking-wider text-[9px] px-2 py-0.5 rounded uppercase">Best Seller</span>
-                        </div>
-                        <div class="p-4 space-y-1">
-                            <h3 class="heading-brand text-lg text-slate-900">Steak Flavoured</h3>
-                            <p class="text-slate-500 text-xs leading-relaxed">Deep, smoky steak seasoning base. Crafted specifically to sit alongside premium meats.</p>
-                        </div>
-                    </div>
-                    <div class="p-4 pt-0 text-[10px] font-bold text-red-600 uppercase tracking-wider">Rich & Beefy</div>
-                </div>
-
-                <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 flex flex-col justify-between">
-                    <div>
-                        <div class="h-44 bg-slate-100 relative">
-                            <img src="https://images.unsplash.com/photo-1608897013039-887f21d8c804?auto=format&fit=crop&w=400&q=80" alt="Salt & Chilli" class="w-full h-full object-cover">
-                            <span class="absolute top-2 left-2 bg-amber-500 text-slate-900 font-bold tracking-wider text-[9px] px-2 py-0.5 rounded uppercase">Fakeaway Kick</span>
-                        </div>
-                        <div class="p-4 space-y-1">
-                            <h3 class="heading-brand text-lg text-slate-900">Salt & Chilli</h3>
-                            <p class="text-slate-500 text-xs leading-relaxed">Punchy local Chinese style spices with mild red pepper heat notes. Perfect for stir-fries.</p>
-                        </div>
-                    </div>
-                    <div class="p-4 pt-0 text-[10px] font-bold text-amber-600 uppercase tracking-wider">Zesty Heat</div>
-                </div>
-
-                <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 flex flex-col justify-between">
-                    <div>
-                        <div class="h-44 bg-slate-100 relative">
-                            <img src="https://images.unsplash.com/photo-1596797038530-2c107229654b?auto=format&fit=crop&w=400&q=80" alt="Smoky Bacon" class="w-full h-full object-cover">
-                            <span class="absolute top-2 left-2 bg-amber-800 text-white font-bold tracking-wider text-[9px] px-2 py-0.5 rounded uppercase">Savoury</span>
-                        </div>
-                        <div class="p-4 space-y-1">
-                            <h3 class="heading-brand text-lg text-slate-900">Smoky Bacon</h3>
-                            <p class="text-slate-500 text-xs leading-relaxed">Wood-smoked back bacon aromatic infusion. Gives charcoal grill vibes to home burgers.</p>
-                        </div>
-                    </div>
-                    <div class="p-4 pt-0 text-[10px] font-bold text-amber-800 uppercase tracking-wider">Smoked Crisp</div>
-                </div>
-
-                <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 flex flex-col justify-between">
-                    <div>
-                        <div class="h-44 bg-slate-100 relative">
-                            <img src="https://images.unsplash.com/photo-1621971899174-ec9412009df6?auto=format&fit=crop&w=400&q=80" alt="Gluten Free Variant" class="w-full h-full object-cover">
-                            <span class="absolute top-2 left-2 bg-emerald-600 text-white font-bold tracking-wider text-[9px] px-2 py-0.5 rounded uppercase">Certified</span>
-                        </div>
-                        <div class="p-4 space-y-1">
-                            <h3 class="heading-brand text-lg text-slate-900">Gluten Free</h3>
-                            <p class="text-slate-500 text-xs leading-relaxed">All the classic taste and intense crunch using verified alternative milling ingredients.</p>
-                        </div>
-                    </div>
-                    <div class="p-4 pt-0 text-[10px] font-bold text-emerald-600 uppercase tracking-wider">Coeliac Safe</div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section id="recipes" class="py-16 px-4 bg-[#141210] text-white">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="space-y-2">
-                <div class="w-12 h-[2px] bg-amber-500"></div>
-                <span class="text-[10px] font-bold tracking-widest text-amber-400 uppercase block">Inspiration From The Kitchen</span>
-                <h2 class="heading-brand text-4xl font-extrabold tracking-tight leading-none text-white">
-                    Real recipes. <br>Built around the crunch.
-                </h2>
-                <p class="text-slate-400 text-sm leading-relaxed max-w-sm pt-1">
-                    Quick ideas to make midweek dinners taste like a takeaway — without leaving the house.
-                </p>
-            </div>
-
-            <div class="relative rounded-lg overflow-hidden shadow-xl max-w-md mt-8">
-                <img src="https://images.unsplash.com/photo-1626132647523-66f5bf380027?auto=format&fit=crop&w=600&q=80" alt="Crispy Fried Onions Heap closeup texture" class="w-full h-60 object-cover">
-                <div class="absolute top-4 left-4 bg-amber-400 text-slate-900 px-2.5 py-1 text-[10px] font-bold tracking-wider rounded uppercase">
-                    The Original
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="wholesale" class="py-16 px-4 bg-white max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-        <div class="space-y-3">
-            <div class="w-12 h-[2px] bg-amber-500"></div>
-            <span class="text-xs font-bold tracking-widest text-slate-500 uppercase block">Wholesale & Trade</span>
-            <h2 class="heading-brand text-4xl font-extrabold text-slate-900 tracking-tight leading-none">
-                Partner with the UK & Ireland's premier crispy onion wholesaler.
-            </h2>
-            <p class="text-slate-600 text-sm leading-relaxed">
-                Supply your butcher shop, restaurant, burger van or retail chain with Ireland's favourite crispy onion topping. Flexible bulk quantities, reliable logistics and POS display units to drive impulse buys.
-            </p>
-        </div>
-
-        <div class="relative rounded-lg overflow-hidden shadow-sm max-w-md">
-            <img src="https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&w=600&q=80" alt="Grocery market storefront local shelf space setup" class="w-full h-48 object-cover">
-            <div class="absolute bottom-4 left-4 text-xs font-bold tracking-widest text-amber-400 uppercase">
-                Who We Supply
-            </div>
-        </div>
-    </section>
-
-    <section class="py-12 bg-slate-50 px-4 border-t border-slate-200">
-        <div class="max-w-md mx-auto space-y-6">
-            <div class="space-y-1">
-                <span class="text-[10px] font-bold tracking-widest text-slate-500 uppercase block">Trade Enquiry Form</span>
-                <h3 class="heading-brand text-3xl font-extrabold text-slate-900 tracking-tight">Contact our sales team.</h3>
-            </div>
-
-            <form class="space-y-4 text-xs font-semibold text-slate-700">
-                <div class="space-y-1.5">
-                    <label class="block uppercase tracking-wider">Company Name *</label>
-                    <input type="text" required class="w-full bg-white border border-slate-300 rounded p-3 text-slate-900 focus:outline-none focus:border-amber-500">
-                </div>
-                <div class="space-y-1.5">
-                    <label class="block uppercase tracking-wider">Contact Name *</label>
-                    <input type="text" required class="w-full bg-white border border-slate-300 rounded p-3 text-slate-900 focus:outline-none focus:border-amber-500">
-                </div>
-                <div class="space-y-1.5">
-                    <label class="block uppercase tracking-wider">Email Address *</label>
-                    <input type="email" required class="w-full bg-white border border-slate-300 rounded p-3 text-slate-900 focus:outline-none focus:border-amber-500">
-                </div>
-                <div class="space-y-1.5">
-                    <label class="block uppercase tracking-wider">Phone Number</label>
-                    <input type="tel" class="w-full bg-white border border-slate-300 rounded p-3 text-slate-900 focus:outline-none focus:border-amber-500">
-                </div>
-                <div class="space-y-1.5">
-                    <label class="block uppercase tracking-wider">Your Message *</label>
-                    <textarea rows="4" required class="w-full bg-white border border-slate-300 rounded p-3 text-slate-900 focus:outline-none focus:border-amber-500"></textarea>
-                </div>
-                <button type="submit" class="w-full bg-slate-900 text-white font-bold uppercase tracking-wider py-3.5 rounded hover:bg-slate-800 transition">
-                    Send Enquiry
-                </button>
-            </form>
-        </div>
-    </section>
-
-    <footer class="bg-[#141210] text-slate-400 py-12 px-4 border-t border-slate-900">
-        <div class="max-w-md mx-auto space-y-8">
-            <div class="space-y-2">
-                <h2 class="heading-brand text-2xl text-white font-extrabold tracking-wider uppercase">Scotts<span class="text-amber-400">.</span><br>Crispy Onions</h2>
-                <p class="text-xs text-slate-400 leading-relaxed">
-                    Family-owned producer of premium crispy onions, hand-crafted in Coleraine and supplied to retailers, restaurants and food service across the UK and Ireland.
-                </p>
-            </div>
-
-            <div class="flex space-x-3">
-                <a href="#instagram" class="w-10 h-10 border border-slate-800 rounded flex items-center justify-center text-white hover:border-amber-500 transition">
-                    <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            <div class="pt-4 flex flex-col sm:flex-row justify-center gap-4 max-w-sm mx-auto">
+                <a href="#showcase" class="bg-white hover:bg-slate-100 text-slate-950 font-sport text-xl uppercase font-bold px-8 py-3.5 rounded shadow-lg transition">
+                    Browse Collection
                 </a>
-                <a href="#facebook" class="w-10 h-10 border border-slate-800 rounded flex items-center justify-center text-white hover:border-amber-500 transition">
-                    <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8H7v3h2v9h3v-9h3l.5-3H12V6c0-.88.39-1 1-1h2V2h-3c-2.42 0-4 1.35-4 3.5V8z"/></svg>
+                <a href="#contact" class="bg-transparent hover:bg-slate-900 border border-slate-700 font-sport text-xl uppercase text-slate-300 font-bold px-8 py-3.5 rounded transition">
+                    Direct Contact
                 </a>
             </div>
+        </div>
+    </header>
 
-            <div class="space-y-4 pt-4 border-t border-slate-900 text-xs text-slate-400">
-                <div class="space-y-1">
-                    <span class="text-amber-400 block font-bold uppercase tracking-widest text-[10px]">Visit / Call</span>
-                    <p class="text-white">96 Moneybrannon Rd, Coleraine BT51 3SL</p>
-                    <p class="text-slate-300 font-medium">028 7086 8192</p>
+    <section class="bg-slate-950/60 border-b border-slate-800 sticky top-20 z-40 backdrop-blur-md py-4 px-4 overflow-x-auto">
+        <div class="max-w-7xl mx-auto flex space-x-3 text-xs uppercase font-bold tracking-wider whitespace-nowrap">
+            <button class="bg-amber-500 text-slate-950 px-4 py-2 rounded">All Eras</button>
+            <button class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-2 rounded transition">Pre-War Vintage</button>
+            <button class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-2 rounded transition">1950s - 1970s</button>
+            <button class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-2 rounded transition">Modern Rookies</button>
+            <button class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-2 rounded transition">PSA Graded</button>
+        </div>
+    </section>
+
+    <section id="showcase" class="py-16 px-4 max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="space-y-2 mb-12">
+            <h2 class="font-sport text-4xl font-extrabold uppercase text-white tracking-wide">Featured Assets Available</h2>
+            <p class="text-slate-400 text-sm">Click any item card to initiate a pricing query or review specific edge/surface condition breakdowns.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <div class="bg-slate-950 rounded-2xl overflow-hidden border border-slate-800 flex flex-col justify-between group hover:border-amber-500/50 transition duration-300">
+                <div>
+                    <div class="h-80 bg-slate-900 relative overflow-hidden p-4 flex items-center justify-center">
+                        <img src="https://images.unsplash.com/photo-1540569014015-19a7be504e3a?auto=format&fit=crop&w=500&q=80" alt="Vintage Baseball Card Mockup Portfolio Display" class="h-full object-contain rounded-lg shadow-md transform group-hover:scale-105 transition duration-300">
+                        <div class="absolute top-4 right-4 bg-red-600 text-white font-sport text-lg tracking-wide px-3 py-1 rounded shadow-md border border-red-500">
+                            PSA 9 <span class="text-xs font-sans font-medium text-red-200">Mint</span>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-2">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="text-xs font-bold tracking-widest text-amber-500 uppercase block">1954 Topps</span>
+                                <h3 class="font-sport text-2xl font-bold text-white tracking-wide uppercase">Hank Aaron Rookie</h3>
+                            </div>
+                            <span class="text-xs bg-slate-800 text-slate-400 px-2 py-1 rounded font-mono">#128</span>
+                        </div>
+                        <p class="text-slate-400 text-xs leading-relaxed">
+                            Exceptional centering with vivid color registry. Perfectly crisp corners with untouched factory paper stock gloss sheen.
+                        </p>
+                    </div>
                 </div>
-                <div class="text-[10px] text-slate-600">
-                    &copy; 2026 Scotts Crispy Onions. All rights reserved.
+                <div class="p-6 pt-0 flex items-center justify-between border-t border-slate-900 mt-4 pt-4">
+                    <span class="font-sport text-2xl font-black text-amber-400">$18,500 <span class="text-[10px] text-slate-500 font-sans font-normal tracking-normal text-slate-400 block">Est. Market Value</span></span>
+                    <a href="#contact" class="bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-slate-200 font-bold px-4 py-2 rounded font-sport text-base uppercase tracking-wide transition">
+                        Inquire
+                    </a>
                 </div>
+            </div>
+
+            <div class="bg-slate-950 rounded-2xl overflow-hidden border border-slate-800 flex flex-col justify-between group hover:border-amber-500/50 transition duration-300">
+                <div>
+                    <div class="h-80 bg-slate-900 relative overflow-hidden p-4 flex items-center justify-center">
+                        <img src="https://images.unsplash.com/photo-1516738901171-8eb4fc13bd20?auto=format&fit=crop&w=500&q=80" alt="Collectible card item asset display image" class="h-full object-contain rounded-lg shadow-md transform group-hover:scale-105 transition duration-300">
+                        <div class="absolute top-4 right-4 bg-slate-800 text-amber-400 font-sport text-lg tracking-wide px-3 py-1 rounded shadow-md border border-slate-700">
+                            BGS 9.5 <span class="text-xs font-sans font-medium text-slate-400">Gem</span>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-2">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="text-xs font-bold tracking-widest text-amber-500 uppercase block">2011 Topps Update</span>
+                                <h3 class="font-sport text-2xl font-bold text-white tracking-wide uppercase">Mike Trout Rookie</h3>
+                            </div>
+                            <span class="text-xs bg-slate-800 text-slate-400 px-2 py-1 rounded font-mono">#US175</span>
+                        </div>
+                        <p class="text-slate-400 text-xs leading-relaxed">
+                            Subgrades: Centering 10, Corners 9.5, Edges 9.5, Surface 9.5. Flawless modern registry targeting registry collectors.
+                        </p>
+                    </div>
+                </div>
+                <div class="p-6 pt-0 flex items-center justify-between border-t border-slate-900 mt-4 pt-4">
+                    <span class="font-sport text-2xl font-black text-amber-400">$3,200 <span class="text-[10px] text-slate-500 font-sans font-normal tracking-normal text-slate-400 block">Est. Market Value</span></span>
+                    <a href="#contact" class="bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-slate-200 font-bold px-4 py-2 rounded font-sport text-base uppercase tracking-wide transition">
+                        Inquire
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-slate-950 rounded-2xl overflow-hidden border border-slate-800 flex flex-col justify-between group hover:border-amber-500/50 transition duration-300">
+                <div>
+                    <div class="h-80 bg-slate-900 relative overflow-hidden p-4 flex items-center justify-center">
+                        <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=500&q=80" alt="High dollar vintage collectible display" class="h-full object-contain rounded-lg shadow-md transform group-hover:scale-105 transition duration-300">
+                        <div class="absolute top-4 right-4 bg-red-600 text-white font-sport text-lg tracking-wide px-3 py-1 rounded shadow-md border border-red-500">
+                            PSA 6 <span class="text-xs font-sans font-medium text-red-200">EX-MT</span>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-2">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="text-xs font-bold tracking-widest text-amber-500 uppercase block">1952 Topps</span>
+                                <h3 class="font-sport text-2xl font-bold text-white tracking-wide uppercase">Jackie Robinson</h3>
+                            </div>
+                            <span class="text-xs bg-slate-800 text-slate-400 px-2 py-1 rounded font-mono">#312</span>
+                        </div>
+                        <p class="text-slate-400 text-xs leading-relaxed">
+                            Vibrant print registration featuring deep rich black and yellow tones. Minor softening typical on authentic vintage cardstock.
+                        </p>
+                    </div>
+                </div>
+                <div class="p-6 pt-0 flex items-center justify-between border-t border-slate-900 mt-4 pt-4">
+                    <span class="font-sport text-2xl font-black text-amber-400">$9,800 <span class="text-[10px] text-slate-500 font-sans font-normal tracking-normal text-slate-400 block">Est. Market Value</span></span>
+                    <a href="#contact" class="bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-slate-200 font-bold px-4 py-2 rounded font-sport text-base uppercase tracking-wide transition">
+                        Inquire
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="about" class="bg-slate-950 py-16 border-y border-slate-800 px-4">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+                <div class="space-y-2">
+                    <span class="text-amber-500 font-bold uppercase tracking-widest text-xs block">Collector Guarantee</span>
+                    <h2 class="font-sport text-4xl font-extrabold uppercase text-white tracking-tight leading-none">
+                        Uncompromising Integrity. <br>Authenticity Guaranteed.
+                    </h2>
+                </div>
+                <p class="text-slate-400 text-sm leading-relaxed">
+                    Every piece shown in this repository inventory goes through multiple tiers of verification. Third-party serialization from standard bodies like PSA, Beckett, and SGC ensures confidence.
+                </p>
+                <div class="space-y-3 font-semibold text-xs text-slate-300">
+                    <div class="flex items-center space-x-2">
+                        <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                        <span>Tamper-proof tracked slab courier dispatching</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                        <span>High-res scans of both fronts and backs on text demand</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                        <span>Insured courier routing worldwide via FedEx Priority</span>
+                    </div>
+                </div>
+            </div>
+            <div class="relative max-w-sm mx-auto w-full">
+                <div class="absolute inset-0 bg-amber-500/10 rounded-2xl blur-xl"></div>
+                <div class="relative bg-slate-900 p-8 rounded-2xl border border-slate-800 space-y-4">
+                    <div class="flex justify-between items-center text-xs tracking-wider uppercase font-mono text-slate-500">
+                        <span>Vault Tracking</span>
+                        <span class="text-emerald-400 flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block mr-1.5 animate-pulse"></span>Secure</span>
+                    </div>
+                    <div class="h-[1px] bg-slate-800"></div>
+                    <div class="space-y-2">
+                        <div class="text-slate-400 text-xs">Primary Custody Location</div>
+                        <div class="text-white font-bold text-lg font-sport tracking-wide uppercase">Bank Safety Deposit Box — London Vault</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-16 px-4 max-w-4xl mx-auto">
+        <div class="text-center space-y-3 mb-10">
+            <span class="text-[10px] font-bold tracking-widest text-amber-500 uppercase block">Deal Directly</span>
+            <h2 class="font-sport text-4xl font-extrabold uppercase text-white tracking-tight">Submit Asset Inquiry or Offer</h2>
+            <p class="text-slate-400 text-sm max-w-md mx-auto">Have trades or cash offers for specific lots? Fill out the structure below and expect direct tracking responses within 24 hours.</p>
+        </div>
+
+        <form class="bg-slate-950 p-8 rounded-2xl border border-slate-800 space-y-4 text-xs font-semibold text-slate-300">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="space-y-1.5">
+                    <label class="block uppercase tracking-wider text-slate-400">Full Name *</label>
+                    <input type="text" required class="w-full bg-slate-900 border border-slate-800 rounded-lg p-3 text-white focus:outline-none focus:border-amber-500">
+                </div>
+                <div class="space-y-1.5">
+                    <label class="block uppercase tracking-wider text-slate-400">Email Address *</label>
+                    <input type="email" required class="w-full bg-slate-900 border border-slate-800 rounded-lg p-3 text-white focus:outline-none focus:border-amber-500">
+                </div>
+            </div>
+            <div class="space-y-1.5">
+                <label class="block uppercase tracking-wider text-slate-400">Select Asset of Interest *</label>
+                <select class="w-full bg-slate-900 border border-slate-800 rounded-lg p-3 text-white focus:outline-none focus:border-amber-500 font-mono">
+                    <option>1954 Topps Hank Aaron Rookie (PSA 9) - $18,500</option>
+                    <option>2011 Topps Update Mike Trout Rookie (BGS 9.5) - $3,200</option>
+                    <option>1952 Topps Jackie Robinson (PSA 6) - $9,800</option>
+                    <option>General Acquisition / Trade Proposition Inquiry</option>
+                </select>
+            </div>
+            <div class="space-y-1.5">
+                <label class="block uppercase tracking-wider text-slate-400">Your Offer Details ($ / Trade Packages) *</label>
+                <textarea rows="5" required placeholder="Outline your price terms or highlight trading credentials..." class="w-full bg-slate-900 border border-slate-800 rounded-lg p-3 text-white focus:outline-none focus:border-amber-500 placeholder-slate-700"></textarea>
+            </div>
+            <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold uppercase tracking-wider py-4 rounded-lg font-sport text-lg transition shadow-lg">
+                Submit Private Offer Securely
+            </button>
+        </form>
+    </section>
+
+    <footer class="bg-black text-slate-500 py-12 px-4 border-t border-slate-900">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-6 text-xs">
+            <div class="flex items-center space-x-2">
+                <span class="inline-block w-2 h-2 rounded-full bg-amber-500"></span>
+                <span class="font-sport text-xl text-white tracking-wider uppercase">Gourmet <span class="text-amber-500">Cards</span></span>
+            </div>
+            <div class="flex space-x-6">
+                <a href="#showcase" class="hover:text-slate-300 transition">Showcase</a>
+                <a href="#about" class="hover:text-slate-300 transition">Authentication</a>
+                <a href="#contact" class="hover:text-slate-300 transition">Terms</a>
+            </div>
+            <div class="text-slate-600 text-[10px]">
+                &copy; 2026 Gourmet Card Co. All images via Unsplash. Built via GitHub Pages.
             </div>
         </div>
     </footer>
@@ -349,4 +278,10 @@ Here is the updated, full single-file HTML. I've added a responsive, 5-column gr
 </html>
 
 ```
-
+### Steps to swap this out on your GitHub account:
+ 1. Open your repository on GitHub.
+ 2. Click on your existing index.html file.
+ 3. Click the **pencil icon** in the top right corner to edit.
+ 4. Select all the old text, delete it, and paste this new code block inside.
+ 5. Scroll down to the bottom and click **Commit Changes**.
+Give it 30 seconds, refresh your custom URL, and your trading card portal will be live!
