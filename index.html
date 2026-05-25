@@ -3,23 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Causeway Cards </title></title>
+    <title>The Card Vault | Professional Baseball Showcase</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        .font-sport {
-            font-family: 'Barlow Condensed', sans-serif;
-        }
-        /* Quick layout utility for team display filters */
+        body { font-family: 'Inter', sans-serif; }
+        .font-sport { font-family: 'Barlow Condensed', sans-serif; }
         .card-hidden { display: none !important; }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-100 antialiased">
+<body class="bg-slate-900 text-slate-100 antialiased relative">
 
     <nav class="bg-slate-950 border-b border-slate-800 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -35,21 +30,22 @@
                     </div>
                 </div>
 
-                <div class="hidden md:flex space-x-8 font-sport text-base tracking-wider uppercase">
-                    <a href="#showcase" class="text-blue-400 transition">Inventory</a>
-                    <a href="#contact" class="text-slate-400 hover:text-white transition">Submit Offer</a>
-                </div>
-
-                <div>
-                    <a href="#contact" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-4 py-2 rounded text-xs font-sport uppercase tracking-wider transition shadow-sm">
-                        Direct Inquiry
-                    </a>
+                <div class="flex items-center space-x-6 font-sport text-base tracking-wider uppercase">
+                    <a href="#showcase" class="text-blue-400 transition hidden md:inline-block">Inventory</a>
+                    
+                    <button id="toggleBasketBtn" class="bg-slate-900 hover:bg-slate-800 text-white border border-slate-700 px-4 py-2 rounded-md flex items-center space-x-2 transition relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                        </svg>
+                        <span class="hidden sm:inline-block">Your Basket</span>
+                        <span id="basketCountBadge" class="bg-blue-600 text-white rounded-full text-xs px-2 py-0.5 font-sans font-bold">0</span>
+                    </button>
                 </div>
             </div>
         </div>
     </nav>
 
-    <header class="relative bg-gradient-to-b from-slate-950 to-slate-900 text-white py-14 px-4 text-center border-b border-slate-800">
+    <header class="relative bg-gradient-to-b from-slate-950 to-slate-900 text-white py-12 px-4 text-center border-b border-slate-800">
         <div class="max-w-3xl mx-auto space-y-4">
             <span class="bg-slate-800/80 text-blue-400 border border-slate-700 font-semibold tracking-widest uppercase text-[10px] px-2.5 py-1 rounded-full inline-block">
                 Direct Collector Vault Availability
@@ -58,7 +54,7 @@
                 BASEBALL CARD <span class="text-blue-500">SHOWCASE</span>
             </h1>
             <p class="max-w-xl mx-auto text-slate-400 text-xs sm:text-sm leading-relaxed font-light">
-                Welcome to my personal inventory page. Transparent individual item pricing, clear team categorization, and hassle-free private offers.
+                Browse my stock, add items straight to your basket list, and submit a dynamic pricing request inquiry instantly. I will personally review the invoice and reach back out to you.
             </p>
         </div>
     </header>
@@ -85,7 +81,8 @@
 
         <div id="inventoryGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             
-            <div class="card-item bg-slate-950 rounded-xl overflow-hidden border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition" data-team="marlins" data-title="eury perez rookie card miami marlins">
+            <div class="card-item bg-slate-950 rounded-xl overflow-hidden border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition" 
+                 data-id="card-1" data-price="4.50" data-team="marlins" data-title="2023 Bowman Chrome Eury Pérez Rookie Card">
                 <div>
                     <div class="h-64 bg-slate-900 relative p-4 flex items-center justify-center border-b border-slate-900">
                         <div class="w-40 h-56 bg-gradient-to-br from-slate-800 to-slate-950 rounded-md border border-slate-700 flex flex-col justify-between p-3 relative shadow-inner">
@@ -110,11 +107,14 @@
                 </div>
                 <div class="p-4 pt-0 flex items-center justify-between border-t border-slate-900/60 mt-2 pt-3">
                     <span class="font-sport text-xl font-bold text-amber-400">£4.50</span>
-                    <a href="#contact" class="text-blue-400 hover:text-blue-300 text-xs font-bold uppercase tracking-wider transition">Inquire →</a>
+                    <button class="add-to-basket-btn bg-blue-600 hover:bg-blue-500 text-white font-bold px-3 py-1.5 rounded text-[11px] uppercase tracking-wider font-sport transition">
+                        Add to Basket
+                    </button>
                 </div>
             </div>
 
-            <div class="card-item bg-slate-950 rounded-xl overflow-hidden border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition" data-team="dodgers" data-title="mookie betts la dodgers superstar">
+            <div class="card-item bg-slate-950 rounded-xl overflow-hidden border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition" 
+                 data-id="card-2" data-price="2.00" data-team="dodgers" data-title="2021 Topps Series 1 Mookie Betts">
                 <div>
                     <div class="h-64 bg-slate-900 relative p-4 flex items-center justify-center border-b border-slate-900">
                         <div class="w-40 h-56 bg-gradient-to-br from-slate-800 to-slate-950 rounded-md border border-slate-700 flex flex-col justify-between p-3 relative shadow-inner">
@@ -136,11 +136,14 @@
                 </div>
                 <div class="p-4 pt-0 flex items-center justify-between border-t border-slate-900/60 mt-2 pt-3">
                     <span class="font-sport text-xl font-bold text-amber-400">£2.00</span>
-                    <a href="#contact" class="text-blue-400 hover:text-blue-300 text-xs font-bold uppercase tracking-wider transition">Inquire →</a>
+                    <button class="add-to-basket-btn bg-blue-600 hover:bg-blue-500 text-white font-bold px-3 py-1.5 rounded text-[11px] uppercase tracking-wider font-sport transition">
+                        Add to Basket
+                    </button>
                 </div>
             </div>
 
-            <div class="card-item bg-slate-950 rounded-xl overflow-hidden border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition" data-team="marlins" data-title="sandy alcantara miami marlins cy young">
+            <div class="card-item bg-slate-950 rounded-xl overflow-hidden border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition" 
+                 data-id="card-3" data-price="1.50" data-team="marlins" data-title="2022 Topps Chrome Sandy Alcantara">
                 <div>
                     <div class="h-64 bg-slate-900 relative p-4 flex items-center justify-center border-b border-slate-900">
                         <div class="w-40 h-56 bg-gradient-to-br from-slate-800 to-slate-950 rounded-md border border-slate-700 flex flex-col justify-between p-3 relative shadow-inner">
@@ -162,11 +165,14 @@
                 </div>
                 <div class="p-4 pt-0 flex items-center justify-between border-t border-slate-900/60 mt-2 pt-3">
                     <span class="font-sport text-xl font-bold text-amber-400">£1.50</span>
-                    <a href="#contact" class="text-blue-400 hover:text-blue-300 text-xs font-bold uppercase tracking-wider transition">Inquire →</a>
+                    <button class="add-to-basket-btn bg-blue-600 hover:bg-blue-500 text-white font-bold px-3 py-1.5 rounded text-[11px] uppercase tracking-wider font-sport transition">
+                        Add to Basket
+                    </button>
                 </div>
             </div>
 
-            <div class="card-item bg-slate-950 rounded-xl overflow-hidden border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition" data-team="dodgers" data-title="freddie freeman la dodgers gold parallel">
+            <div class="card-item bg-slate-950 rounded-xl overflow-hidden border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition" 
+                 data-id="card-4" data-price="3.00" data-team="dodgers" data-title="2023 Topps Heritage Freddie Freeman Parallel">
                 <div>
                     <div class="h-64 bg-slate-900 relative p-4 flex items-center justify-center border-b border-slate-900">
                         <div class="w-40 h-56 bg-gradient-to-br from-slate-800 to-slate-950 rounded-md border border-slate-700 flex flex-col justify-between p-3 relative shadow-inner">
@@ -191,19 +197,47 @@
                 </div>
                 <div class="p-4 pt-0 flex items-center justify-between border-t border-slate-900/60 mt-2 pt-3">
                     <span class="font-sport text-xl font-bold text-amber-400">£3.00</span>
-                    <a href="#contact" class="text-blue-400 hover:text-blue-300 text-xs font-bold uppercase tracking-wider transition">Inquire →</a>
+                    <button class="add-to-basket-btn bg-blue-600 hover:bg-blue-500 text-white font-bold px-3 py-1.5 rounded text-[11px] uppercase tracking-wider font-sport transition">
+                        Add to Basket
+                    </button>
                 </div>
             </div>
 
         </div>
     </main>
 
+    <div id="basketDrawer" class="fixed inset-y-0 right-0 w-full sm:w-96 bg-slate-950 border-l border-slate-800 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col justify-between hidden">
+        <div class="p-6 border-b border-slate-800 flex justify-between items-center bg-slate-900">
+            <div class="flex items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                </svg>
+                <h3 class="font-sport text-xl font-bold uppercase tracking-wide text-white">Your Inquiry List</h3>
+            </div>
+            <button id="closeBasketBtn" class="text-slate-400 hover:text-white font-bold text-xs uppercase tracking-wider">Close ×</button>
+        </div>
+
+        <div id="basketItemsList" class="p-6 overflow-y-auto flex-1 space-y-4 text-xs">
+            <p class="text-slate-500 text-center py-8">Your basket is currently empty.</p>
+        </div>
+
+        <div class="p-6 border-t border-slate-800 bg-slate-900 space-y-4">
+            <div class="flex justify-between items-center">
+                <span class="font-sport text-lg uppercase tracking-wide text-slate-400">Estimated Invoice Value:</span>
+                <span id="basketTotalPrice" class="font-sport text-2xl font-bold text-amber-400">£0.00</span>
+            </div>
+            <a href="#contact" id="checkoutRedirectBtn" class="block w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-bold uppercase tracking-wider py-3 rounded-md font-sport text-base transition">
+                Prepare Inquiry Form
+            </a>
+        </div>
+    </div>
+
     <section id="contact" class="py-12 bg-slate-950 border-t border-slate-800 px-4">
         <div class="max-w-md mx-auto space-y-6">
             <div class="space-y-1 text-center">
                 <span class="text-[10px] font-bold tracking-widest text-blue-500 uppercase block">Inquiry Engine</span>
                 <h3 class="font-sport text-3xl font-extrabold uppercase text-white tracking-tight">Make a Direct Purchase Request</h3>
-                <p class="text-slate-400 text-xs max-w-xs mx-auto">Drop your desired item lot names here to finalize terms and secure secure routing lines.</p>
+                <p class="text-slate-400 text-xs max-w-xs mx-auto">Fill in your information. Your selected basket lot invoice list is compiled right inside the input message box below automatically.</p>
             </div>
 
             <form class="space-y-4 text-xs font-semibold text-slate-300">
@@ -219,7 +253,7 @@
                 </div>
                 <div class="space-y-1.5">
                     <label class="block uppercase tracking-wider text-slate-400">List Cards / Message Requirements *</label>
-                    <textarea rows="4" required placeholder="Type out your selection list here..." class="w-full bg-slate-900 border border-slate-800 rounded-md p-3 text-white focus:outline-none focus:border-blue-500 placeholder-slate-700"></textarea>
+                    <textarea id="formMessageField" rows="5" required placeholder="Your selected basket invoice list will paste here automatically when you hit 'Prepare Inquiry Form' inside your basket drawer above..." class="w-full bg-slate-900 border border-slate-800 rounded-md p-3 text-white focus:outline-none focus:border-blue-500 placeholder-slate-700"></textarea>
                 </div>
                 <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold uppercase tracking-wider py-3.5 rounded-md font-sport text-base transition">
                     Send Order Details
@@ -237,6 +271,107 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // --- Basket State Store ---
+            let basket = [];
+
+            // DOM elements
+            const toggleBasketBtn = document.getElementById('toggleBasketBtn');
+            const closeBasketBtn = document.getElementById('closeBasketBtn');
+            const basketDrawer = document.getElementById('basketDrawer');
+            const basketItemsList = document.getElementById('basketItemsList');
+            const basketTotalPrice = document.getElementById('basketTotalPrice');
+            const basketCountBadge = document.getElementById('basketCountBadge');
+            const checkoutRedirectBtn = document.getElementById('checkoutRedirectBtn');
+            const formMessageField = document.getElementById('formMessageField');
+
+            // Toggle Open/Close Basket Sidebar Drawer View
+            toggleBasketBtn.addEventListener('click', () => {
+                basketDrawer.classList.remove('hidden');
+                setTimeout(() => { basketDrawer.classList.remove('translate-x-full'); }, 10);
+            });
+            closeBasketBtn.addEventListener('click', () => {
+                basketDrawer.classList.add('translate-x-full');
+                setTimeout(() => { basketDrawer.classList.add('hidden'); }, 300);
+            });
+
+            // Handle adding items to basket selection array
+            document.querySelectorAll('.add-to-basket-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const parentCard = e.target.closest('.card-item');
+                    const id = parentCard.getAttribute('data-id');
+                    const title = parentCard.getAttribute('data-title');
+                    const price = parseFloat(parentCard.getAttribute('data-price'));
+
+                    // Prevent double adding same card asset
+                    if (basket.some(item => item.id === id)) {
+                        alert("This single-copy card is already in your basket list!");
+                        return;
+                    }
+
+                    basket.push({ id, title, price });
+                    updateBasketUI();
+                });
+            });
+
+            // Update UI Counters & Items List inside sidebar
+            function updateBasketUI() {
+                basketCountBadge.innerText = basket.length;
+
+                if (basket.length === 0) {
+                    basketItemsList.innerHTML = `<p class="text-slate-500 text-center py-8">Your basket is currently empty.</p>`;
+                    basketTotalPrice.innerText = "£0.00";
+                    return;
+                }
+
+                let listHTML = '';
+                let total = 0;
+                
+                basket.forEach((item, index) => {
+                    total += item.price;
+                    listHTML += `
+                        <div class="flex justify-between items-center bg-slate-900 p-3 rounded border border-slate-800">
+                            <div>
+                                <p class="text-white font-medium font-sport uppercase text-sm leading-tight">${item.title}</p>
+                                <p class="text-amber-400 font-mono mt-0.5">£${item.price.toFixed(2)}</p>
+                            </div>
+                            <button onclick="window.removeBasketItem(${index})" class="text-red-400 hover:text-red-300 font-semibold text-lg px-2">×</button>
+                        </div>
+                    `;
+                });
+
+                basketItemsList.innerHTML = listHTML;
+                basketTotalPrice.innerText = `£${total.toFixed(2)}`;
+            }
+
+            // Expose removal method out to global standard line execution runtime
+            window.removeBasketItem = function(index) {
+                basket.splice(index, 1);
+                updateBasketUI();
+            };
+
+            // Package invoice and dump cleanly down directly inside Contact Form Message Box
+            checkoutRedirectBtn.addEventListener('click', () => {
+                if(basket.length === 0) {
+                    alert("Your basket is empty. Add cards first!");
+                    return;
+                }
+                
+                let orderString = "Hello! I would like to inquire about purchasing the following baseball card lot listing:\n\n";
+                let total = 0;
+                basket.forEach((item, idx) => {
+                    total += item.price;
+                    orderString += `${idx + 1}. ${item.title} - £${item.price.toFixed(2)}\n`;
+                });
+                orderString += `\nTotal Estimated Invoice Cost: £${total.toFixed(2)}`;
+                
+                formMessageField.value = orderString;
+                
+                // Close drawer view smoothly after dumping data content block down
+                basketDrawer.classList.add('translate-x-full');
+                setTimeout(() => { basketDrawer.classList.add('hidden'); }, 300);
+            });
+
+            // --- Existing Live Filtering Engine Logic ---
             const searchInput = document.getElementById('cardSearch');
             const filterButtons = document.querySelectorAll('.filter-btn');
             const cardItems = document.querySelectorAll('.card-item');
@@ -271,7 +406,6 @@
                         b.classList.remove('bg-blue-600', 'text-white');
                         b.classList.add('bg-slate-900', 'text-slate-300');
                     });
-                    
                     button.classList.remove('bg-slate-900', 'text-slate-300');
                     button.classList.add('bg-blue-600', 'text-white');
 
@@ -284,6 +418,3 @@
 
 </body>
 </html>
-
-```
-
