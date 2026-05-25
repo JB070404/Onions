@@ -1,13 +1,9 @@
-Let's shift gears! Moving from onions to baseball cards is a classic pivot. A custom website is perfect for displaying your card collection, highlighting conditions, and attracting collectors without paying heavy marketplace seller fees.
-Since we are building a sports card storefront/portfolio site, the layout needs to feel clean, high-end, and trust-inspiring. It should feature a high-impact header, clear grade/condition badges (like PSA/BGS styling), filter options, and direct inquiry actions.
-Here is the **complete, production-ready HTML code** for your new custom Baseball Card Showcase website. It is fully responsive, styled with Tailwind CSS, and ready to be uploaded straight to your GitHub repository as an index.html file.
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gourmet Card Co. | Premium Baseball Card Collection</title>
+    <title> Causeway Cards </title></title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,6 +15,8 @@ Here is the **complete, production-ready HTML code** for your new custom Basebal
         .font-sport {
             font-family: 'Barlow Condensed', sans-serif;
         }
+        /* Quick layout utility for team display filters */
+        .card-hidden { display: none !important; }
     </style>
 </head>
 <body class="bg-slate-900 text-slate-100 antialiased">
@@ -26,262 +24,266 @@ Here is the **complete, production-ready HTML code** for your new custom Basebal
     <nav class="bg-slate-950 border-b border-slate-800 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20 items-center">
+                
                 <div class="flex items-center space-x-3">
-                    <div class="bg-amber-500 text-slate-950 font-black p-2.5 rounded-lg font-sport text-xl tracking-tight leading-none">
-                        GC
+                    <div class="bg-blue-600 text-white font-sport text-xl px-3 py-1.5 rounded-md tracking-tighter font-black border border-blue-400/30">
+                        CV
                     </div>
-                    <span class="font-sport text-2xl tracking-wider text-white uppercase">Gourmet <span class="text-amber-500">Cards</span></span>
+                    <div>
+                        <span class="font-sport text-xl tracking-wider text-white uppercase block leading-none">The Card Vault</span>
+                        <span class="text-[10px] text-slate-400 font-medium tracking-widest uppercase block mt-1">Collection of the Shop Owner</span>
+                    </div>
                 </div>
-                <div class="hidden md:flex space-x-8 font-sport text-lg tracking-wide uppercase">
-                    <a href="#showcase" class="text-amber-500 transition">The Showcase</a>
-                    <a href="#about" class="text-slate-400 hover:text-white transition">Grading Standard</a>
-                    <a href="#contact" class="text-slate-400 hover:text-white transition">Inquire</a>
+
+                <div class="hidden md:flex space-x-8 font-sport text-base tracking-wider uppercase">
+                    <a href="#showcase" class="text-blue-400 transition">Inventory</a>
+                    <a href="#contact" class="text-slate-400 hover:text-white transition">Submit Offer</a>
                 </div>
+
                 <div>
-                    <a href="#contact" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-5 py-2.5 rounded font-sport text-lg uppercase tracking-wide transition shadow-md">
-                        Make an Offer
+                    <a href="#contact" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-4 py-2 rounded text-xs font-sport uppercase tracking-wider transition shadow-sm">
+                        Direct Inquiry
                     </a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <header class="relative bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-black text-white py-20 px-4 text-center border-b border-slate-800">
-        <div class="max-w-4xl mx-auto space-y-6">
-            <span class="bg-slate-800/80 text-amber-400 border border-slate-700 font-semibold tracking-widest uppercase text-xs px-3 py-1.5 rounded-full inline-block">
-                Personal Collection Sale • 2026 Update
+    <header class="relative bg-gradient-to-b from-slate-950 to-slate-900 text-white py-14 px-4 text-center border-b border-slate-800">
+        <div class="max-w-3xl mx-auto space-y-4">
+            <span class="bg-slate-800/80 text-blue-400 border border-slate-700 font-semibold tracking-widest uppercase text-[10px] px-2.5 py-1 rounded-full inline-block">
+                Direct Collector Vault Availability
             </span>
-            <h1 class="font-sport text-6xl sm:text-8xl tracking-tight uppercase leading-none text-white">
-                VINTAGE ICONIC <br><span class="text-amber-500">BASEBALL CARDS</span>
+            <h1 class="font-sport text-4xl sm:text-6xl tracking-tight uppercase leading-none">
+                BASEBALL CARD <span class="text-blue-500">SHOWCASE</span>
             </h1>
-            <p class="max-w-xl mx-auto text-slate-400 text-base sm:text-lg leading-relaxed font-light">
-                A curated vault of high-grade rookies, rare parallels, and timeless hall-of-famers. Securely maintained, accurately described, and open for serious collector offers.
+            <p class="max-w-xl mx-auto text-slate-400 text-xs sm:text-sm leading-relaxed font-light">
+                Welcome to my personal inventory page. Transparent individual item pricing, clear team categorization, and hassle-free private offers.
             </p>
-            <div class="pt-4 flex flex-col sm:flex-row justify-center gap-4 max-w-sm mx-auto">
-                <a href="#showcase" class="bg-white hover:bg-slate-100 text-slate-950 font-sport text-xl uppercase font-bold px-8 py-3.5 rounded shadow-lg transition">
-                    Browse Collection
-                </a>
-                <a href="#contact" class="bg-transparent hover:bg-slate-900 border border-slate-700 font-sport text-xl uppercase text-slate-300 font-bold px-8 py-3.5 rounded transition">
-                    Direct Contact
-                </a>
-            </div>
         </div>
     </header>
 
-    <section class="bg-slate-950/60 border-b border-slate-800 sticky top-20 z-40 backdrop-blur-md py-4 px-4 overflow-x-auto">
-        <div class="max-w-7xl mx-auto flex space-x-3 text-xs uppercase font-bold tracking-wider whitespace-nowrap">
-            <button class="bg-amber-500 text-slate-950 px-4 py-2 rounded">All Eras</button>
-            <button class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-2 rounded transition">Pre-War Vintage</button>
-            <button class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-2 rounded transition">1950s - 1970s</button>
-            <button class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-2 rounded transition">Modern Rookies</button>
-            <button class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-2 rounded transition">PSA Graded</button>
-        </div>
-    </section>
-
-    <section id="showcase" class="py-16 px-4 max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="space-y-2 mb-12">
-            <h2 class="font-sport text-4xl font-extrabold uppercase text-white tracking-wide">Featured Assets Available</h2>
-            <p class="text-slate-400 text-sm">Click any item card to initiate a pricing query or review specific edge/surface condition breakdowns.</p>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    <main id="showcase" class="py-12 px-4 max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-8">
+        
+        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-4 md:space-y-0 md:flex md:items-center md:justify-between gap-4">
             
-            <div class="bg-slate-950 rounded-2xl overflow-hidden border border-slate-800 flex flex-col justify-between group hover:border-amber-500/50 transition duration-300">
+            <div class="relative flex-1 max-w-md">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500">
+                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </span>
+                <input id="cardSearch" type="text" placeholder="Search player name, card brand, year..." class="w-full bg-slate-900 border border-slate-800 rounded-lg pl-9 pr-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition">
+            </div>
+
+            <div id="filterButtonGroup" class="flex flex-wrap gap-2 text-xs uppercase tracking-wider font-bold">
+                <button data-filter="all" class="filter-btn bg-blue-600 text-white px-4 py-2 rounded-md transition">All Teams</button>
+                <button data-filter="marlins" class="filter-btn bg-slate-900 hover:bg-slate-800 text-slate-300 px-4 py-2 rounded-md transition border border-slate-800">Miami Marlins</button>
+                <button data-filter="dodgers" class="filter-btn bg-slate-900 hover:bg-slate-800 text-slate-300 px-4 py-2 rounded-md transition border border-slate-800">LA Dodgers</button>
+            </div>
+        </div>
+
+        <div id="inventoryGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <div class="card-item bg-slate-950 rounded-xl overflow-hidden border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition" data-team="marlins" data-title="eury perez rookie card miami marlins">
                 <div>
-                    <div class="h-80 bg-slate-900 relative overflow-hidden p-4 flex items-center justify-center">
-                        <img src="https://images.unsplash.com/photo-1540569014015-19a7be504e3a?auto=format&fit=crop&w=500&q=80" alt="Vintage Baseball Card Mockup Portfolio Display" class="h-full object-contain rounded-lg shadow-md transform group-hover:scale-105 transition duration-300">
-                        <div class="absolute top-4 right-4 bg-red-600 text-white font-sport text-lg tracking-wide px-3 py-1 rounded shadow-md border border-red-500">
-                            PSA 9 <span class="text-xs font-sans font-medium text-red-200">Mint</span>
-                        </div>
-                    </div>
-                    <div class="p-6 space-y-2">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <span class="text-xs font-bold tracking-widest text-amber-500 uppercase block">1954 Topps</span>
-                                <h3 class="font-sport text-2xl font-bold text-white tracking-wide uppercase">Hank Aaron Rookie</h3>
+                    <div class="h-64 bg-slate-900 relative p-4 flex items-center justify-center border-b border-slate-900">
+                        <div class="w-40 h-56 bg-gradient-to-br from-slate-800 to-slate-950 rounded-md border border-slate-700 flex flex-col justify-between p-3 relative shadow-inner">
+                            <span class="text-[8px] font-mono text-slate-500 block uppercase">2023 Bowman Chrome</span>
+                            <div class="w-full h-24 bg-slate-900/60 rounded border border-slate-800 flex items-center justify-center">
+                                <svg class="w-6 h-6 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                             </div>
-                            <span class="text-xs bg-slate-800 text-slate-400 px-2 py-1 rounded font-mono">#128</span>
+                            <div class="space-y-0.5">
+                                <span class="font-sport text-xs text-white uppercase block leading-none tracking-wide">Eury Pérez</span>
+                                <span class="text-[8px] text-teal-400 block uppercase tracking-wider">Miami Marlins • Pitcher</span>
+                            </div>
                         </div>
-                        <p class="text-slate-400 text-xs leading-relaxed">
-                            Exceptional centering with vivid color registry. Perfectly crisp corners with untouched factory paper stock gloss sheen.
-                        </p>
+                        <span class="absolute top-3 right-3 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white font-bold text-[8px] tracking-widest px-2 py-0.5 rounded shadow">
+                            SHINY / REFRACTOR
+                        </span>
+                    </div>
+                    <div class="p-4 space-y-1">
+                        <span class="text-[10px] font-bold text-teal-400 tracking-wider uppercase block">Miami Marlins</span>
+                        <h3 class="font-sport text-lg font-bold text-white uppercase tracking-wide">Eury Pérez Rookie Card</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed font-light">Bowman Chrome modern rookie base asset. Crisp corners and pristine raw condition.</p>
                     </div>
                 </div>
-                <div class="p-6 pt-0 flex items-center justify-between border-t border-slate-900 mt-4 pt-4">
-                    <span class="font-sport text-2xl font-black text-amber-400">$18,500 <span class="text-[10px] text-slate-500 font-sans font-normal tracking-normal text-slate-400 block">Est. Market Value</span></span>
-                    <a href="#contact" class="bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-slate-200 font-bold px-4 py-2 rounded font-sport text-base uppercase tracking-wide transition">
-                        Inquire
-                    </a>
+                <div class="p-4 pt-0 flex items-center justify-between border-t border-slate-900/60 mt-2 pt-3">
+                    <span class="font-sport text-xl font-bold text-amber-400">£4.50</span>
+                    <a href="#contact" class="text-blue-400 hover:text-blue-300 text-xs font-bold uppercase tracking-wider transition">Inquire →</a>
                 </div>
             </div>
 
-            <div class="bg-slate-950 rounded-2xl overflow-hidden border border-slate-800 flex flex-col justify-between group hover:border-amber-500/50 transition duration-300">
+            <div class="card-item bg-slate-950 rounded-xl overflow-hidden border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition" data-team="dodgers" data-title="mookie betts la dodgers superstar">
                 <div>
-                    <div class="h-80 bg-slate-900 relative overflow-hidden p-4 flex items-center justify-center">
-                        <img src="https://images.unsplash.com/photo-1516738901171-8eb4fc13bd20?auto=format&fit=crop&w=500&q=80" alt="Collectible card item asset display image" class="h-full object-contain rounded-lg shadow-md transform group-hover:scale-105 transition duration-300">
-                        <div class="absolute top-4 right-4 bg-slate-800 text-amber-400 font-sport text-lg tracking-wide px-3 py-1 rounded shadow-md border border-slate-700">
-                            BGS 9.5 <span class="text-xs font-sans font-medium text-slate-400">Gem</span>
+                    <div class="h-64 bg-slate-900 relative p-4 flex items-center justify-center border-b border-slate-900">
+                        <div class="w-40 h-56 bg-gradient-to-br from-slate-800 to-slate-950 rounded-md border border-slate-700 flex flex-col justify-between p-3 relative shadow-inner">
+                            <span class="text-[8px] font-mono text-slate-500 block uppercase">2021 Topps Series 1</span>
+                            <div class="w-full h-24 bg-slate-900/60 rounded border border-slate-800 flex items-center justify-center">
+                                <svg class="w-6 h-6 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                            </div>
+                            <div class="space-y-0.5">
+                                <span class="font-sport text-xs text-white uppercase block leading-none tracking-wide">Mookie Betts</span>
+                                <span class="text-[8px] text-blue-400 block uppercase tracking-wider">LA Dodgers • Outfield</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="p-6 space-y-2">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <span class="text-xs font-bold tracking-widest text-amber-500 uppercase block">2011 Topps Update</span>
-                                <h3 class="font-sport text-2xl font-bold text-white tracking-wide uppercase">Mike Trout Rookie</h3>
-                            </div>
-                            <span class="text-xs bg-slate-800 text-slate-400 px-2 py-1 rounded font-mono">#US175</span>
-                        </div>
-                        <p class="text-slate-400 text-xs leading-relaxed">
-                            Subgrades: Centering 10, Corners 9.5, Edges 9.5, Surface 9.5. Flawless modern registry targeting registry collectors.
-                        </p>
+                    <div class="p-4 space-y-1">
+                        <span class="text-[10px] font-bold text-blue-400 tracking-wider uppercase block">LA Dodgers</span>
+                        <h3 class="font-sport text-lg font-bold text-white uppercase tracking-wide">Mookie Betts Base Asset</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed font-light">Clean ungradable raw profile card with excellent symmetry and edges.</p>
                     </div>
                 </div>
-                <div class="p-6 pt-0 flex items-center justify-between border-t border-slate-900 mt-4 pt-4">
-                    <span class="font-sport text-2xl font-black text-amber-400">$3,200 <span class="text-[10px] text-slate-500 font-sans font-normal tracking-normal text-slate-400 block">Est. Market Value</span></span>
-                    <a href="#contact" class="bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-slate-200 font-bold px-4 py-2 rounded font-sport text-base uppercase tracking-wide transition">
-                        Inquire
-                    </a>
+                <div class="p-4 pt-0 flex items-center justify-between border-t border-slate-900/60 mt-2 pt-3">
+                    <span class="font-sport text-xl font-bold text-amber-400">£2.00</span>
+                    <a href="#contact" class="text-blue-400 hover:text-blue-300 text-xs font-bold uppercase tracking-wider transition">Inquire →</a>
                 </div>
             </div>
 
-            <div class="bg-slate-950 rounded-2xl overflow-hidden border border-slate-800 flex flex-col justify-between group hover:border-amber-500/50 transition duration-300">
+            <div class="card-item bg-slate-950 rounded-xl overflow-hidden border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition" data-team="marlins" data-title="sandy alcantara miami marlins cy young">
                 <div>
-                    <div class="h-80 bg-slate-900 relative overflow-hidden p-4 flex items-center justify-center">
-                        <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=500&q=80" alt="High dollar vintage collectible display" class="h-full object-contain rounded-lg shadow-md transform group-hover:scale-105 transition duration-300">
-                        <div class="absolute top-4 right-4 bg-red-600 text-white font-sport text-lg tracking-wide px-3 py-1 rounded shadow-md border border-red-500">
-                            PSA 6 <span class="text-xs font-sans font-medium text-red-200">EX-MT</span>
+                    <div class="h-64 bg-slate-900 relative p-4 flex items-center justify-center border-b border-slate-900">
+                        <div class="w-40 h-56 bg-gradient-to-br from-slate-800 to-slate-950 rounded-md border border-slate-700 flex flex-col justify-between p-3 relative shadow-inner">
+                            <span class="text-[8px] font-mono text-slate-500 block uppercase">2022 Topps Chrome</span>
+                            <div class="w-full h-24 bg-slate-900/60 rounded border border-slate-800 flex items-center justify-center">
+                                <svg class="w-6 h-6 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                            </div>
+                            <div class="space-y-0.5">
+                                <span class="font-sport text-xs text-white uppercase block leading-none tracking-wide">Sandy Alcantara</span>
+                                <span class="text-[8px] text-teal-400 block uppercase tracking-wider">Miami Marlins • Ace</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="p-6 space-y-2">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <span class="text-xs font-bold tracking-widest text-amber-500 uppercase block">1952 Topps</span>
-                                <h3 class="font-sport text-2xl font-bold text-white tracking-wide uppercase">Jackie Robinson</h3>
-                            </div>
-                            <span class="text-xs bg-slate-800 text-slate-400 px-2 py-1 rounded font-mono">#312</span>
-                        </div>
-                        <p class="text-slate-400 text-xs leading-relaxed">
-                            Vibrant print registration featuring deep rich black and yellow tones. Minor softening typical on authentic vintage cardstock.
-                        </p>
+                    <div class="p-4 space-y-1">
+                        <span class="text-[10px] font-bold text-teal-400 tracking-wider uppercase block">Miami Marlins</span>
+                        <h3 class="font-sport text-lg font-bold text-white uppercase tracking-wide">Sandy Alcantara Base</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed font-light">Cy Young winner print year option. Smooth unblemished surfacing setup.</p>
                     </div>
                 </div>
-                <div class="p-6 pt-0 flex items-center justify-between border-t border-slate-900 mt-4 pt-4">
-                    <span class="font-sport text-2xl font-black text-amber-400">$9,800 <span class="text-[10px] text-slate-500 font-sans font-normal tracking-normal text-slate-400 block">Est. Market Value</span></span>
-                    <a href="#contact" class="bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-slate-200 font-bold px-4 py-2 rounded font-sport text-base uppercase tracking-wide transition">
-                        Inquire
-                    </a>
+                <div class="p-4 pt-0 flex items-center justify-between border-t border-slate-900/60 mt-2 pt-3">
+                    <span class="font-sport text-xl font-bold text-amber-400">£1.50</span>
+                    <a href="#contact" class="text-blue-400 hover:text-blue-300 text-xs font-bold uppercase tracking-wider transition">Inquire →</a>
+                </div>
+            </div>
+
+            <div class="card-item bg-slate-950 rounded-xl overflow-hidden border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition" data-team="dodgers" data-title="freddie freeman la dodgers gold parallel">
+                <div>
+                    <div class="h-64 bg-slate-900 relative p-4 flex items-center justify-center border-b border-slate-900">
+                        <div class="w-40 h-56 bg-gradient-to-br from-slate-800 to-slate-950 rounded-md border border-slate-700 flex flex-col justify-between p-3 relative shadow-inner">
+                            <span class="text-[8px] font-mono text-slate-500 block uppercase">2023 Topps Heritage</span>
+                            <div class="w-full h-24 bg-slate-900/60 rounded border border-slate-800 flex items-center justify-center">
+                                <svg class="w-6 h-6 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                            </div>
+                            <div class="space-y-0.5">
+                                <span class="font-sport text-xs text-white uppercase block leading-none tracking-wide">Freddie Freeman</span>
+                                <span class="text-[8px] text-blue-400 block uppercase tracking-wider">LA Dodgers • 1B</span>
+                            </div>
+                        </div>
+                        <span class="absolute top-3 right-3 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white font-bold text-[8px] tracking-widest px-2 py-0.5 rounded shadow">
+                            SHINY / REFRACTOR
+                        </span>
+                    </div>
+                    <div class="p-4 space-y-1">
+                        <span class="text-[10px] font-bold text-blue-400 tracking-wider uppercase block">LA Dodgers</span>
+                        <h3 class="font-sport text-lg font-bold text-white uppercase tracking-wide">Freddie Freeman Parallel</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed font-light">Heritage card stock edition featuring high chrome refractive finish gloss.</p>
+                    </div>
+                </div>
+                <div class="p-4 pt-0 flex items-center justify-between border-t border-slate-900/60 mt-2 pt-3">
+                    <span class="font-sport text-xl font-bold text-amber-400">£3.00</span>
+                    <a href="#contact" class="text-blue-400 hover:text-blue-300 text-xs font-bold uppercase tracking-wider transition">Inquire →</a>
                 </div>
             </div>
 
         </div>
-    </section>
+    </main>
 
-    <section id="about" class="bg-slate-950 py-16 border-y border-slate-800 px-4">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
-            <div class="space-y-6">
-                <div class="space-y-2">
-                    <span class="text-amber-500 font-bold uppercase tracking-widest text-xs block">Collector Guarantee</span>
-                    <h2 class="font-sport text-4xl font-extrabold uppercase text-white tracking-tight leading-none">
-                        Uncompromising Integrity. <br>Authenticity Guaranteed.
-                    </h2>
-                </div>
-                <p class="text-slate-400 text-sm leading-relaxed">
-                    Every piece shown in this repository inventory goes through multiple tiers of verification. Third-party serialization from standard bodies like PSA, Beckett, and SGC ensures confidence.
-                </p>
-                <div class="space-y-3 font-semibold text-xs text-slate-300">
-                    <div class="flex items-center space-x-2">
-                        <span class="w-2 h-2 rounded-full bg-amber-500"></span>
-                        <span>Tamper-proof tracked slab courier dispatching</span>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <span class="w-2 h-2 rounded-full bg-amber-500"></span>
-                        <span>High-res scans of both fronts and backs on text demand</span>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <span class="w-2 h-2 rounded-full bg-amber-500"></span>
-                        <span>Insured courier routing worldwide via FedEx Priority</span>
-                    </div>
-                </div>
+    <section id="contact" class="py-12 bg-slate-950 border-t border-slate-800 px-4">
+        <div class="max-w-md mx-auto space-y-6">
+            <div class="space-y-1 text-center">
+                <span class="text-[10px] font-bold tracking-widest text-blue-500 uppercase block">Inquiry Engine</span>
+                <h3 class="font-sport text-3xl font-extrabold uppercase text-white tracking-tight">Make a Direct Purchase Request</h3>
+                <p class="text-slate-400 text-xs max-w-xs mx-auto">Drop your desired item lot names here to finalize terms and secure secure routing lines.</p>
             </div>
-            <div class="relative max-w-sm mx-auto w-full">
-                <div class="absolute inset-0 bg-amber-500/10 rounded-2xl blur-xl"></div>
-                <div class="relative bg-slate-900 p-8 rounded-2xl border border-slate-800 space-y-4">
-                    <div class="flex justify-between items-center text-xs tracking-wider uppercase font-mono text-slate-500">
-                        <span>Vault Tracking</span>
-                        <span class="text-emerald-400 flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block mr-1.5 animate-pulse"></span>Secure</span>
+
+            <form class="space-y-4 text-xs font-semibold text-slate-300">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="space-y-1.5">
+                        <label class="block uppercase tracking-wider text-slate-400">Your Full Name *</label>
+                        <input type="text" required class="w-full bg-slate-900 border border-slate-800 rounded-md p-3 text-white focus:outline-none focus:border-blue-500">
                     </div>
-                    <div class="h-[1px] bg-slate-800"></div>
-                    <div class="space-y-2">
-                        <div class="text-slate-400 text-xs">Primary Custody Location</div>
-                        <div class="text-white font-bold text-lg font-sport tracking-wide uppercase">Bank Safety Deposit Box — London Vault</div>
+                    <div class="space-y-1.5">
+                        <label class="block uppercase tracking-wider text-slate-400">Email Address *</label>
+                        <input type="email" required class="w-full bg-slate-900 border border-slate-800 rounded-md p-3 text-white focus:outline-none focus:border-blue-500">
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="py-16 px-4 max-w-4xl mx-auto">
-        <div class="text-center space-y-3 mb-10">
-            <span class="text-[10px] font-bold tracking-widest text-amber-500 uppercase block">Deal Directly</span>
-            <h2 class="font-sport text-4xl font-extrabold uppercase text-white tracking-tight">Submit Asset Inquiry or Offer</h2>
-            <p class="text-slate-400 text-sm max-w-md mx-auto">Have trades or cash offers for specific lots? Fill out the structure below and expect direct tracking responses within 24 hours.</p>
-        </div>
-
-        <form class="bg-slate-950 p-8 rounded-2xl border border-slate-800 space-y-4 text-xs font-semibold text-slate-300">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div class="space-y-1.5">
-                    <label class="block uppercase tracking-wider text-slate-400">Full Name *</label>
-                    <input type="text" required class="w-full bg-slate-900 border border-slate-800 rounded-lg p-3 text-white focus:outline-none focus:border-amber-500">
+                    <label class="block uppercase tracking-wider text-slate-400">List Cards / Message Requirements *</label>
+                    <textarea rows="4" required placeholder="Type out your selection list here..." class="w-full bg-slate-900 border border-slate-800 rounded-md p-3 text-white focus:outline-none focus:border-blue-500 placeholder-slate-700"></textarea>
                 </div>
-                <div class="space-y-1.5">
-                    <label class="block uppercase tracking-wider text-slate-400">Email Address *</label>
-                    <input type="email" required class="w-full bg-slate-900 border border-slate-800 rounded-lg p-3 text-white focus:outline-none focus:border-amber-500">
-                </div>
-            </div>
-            <div class="space-y-1.5">
-                <label class="block uppercase tracking-wider text-slate-400">Select Asset of Interest *</label>
-                <select class="w-full bg-slate-900 border border-slate-800 rounded-lg p-3 text-white focus:outline-none focus:border-amber-500 font-mono">
-                    <option>1954 Topps Hank Aaron Rookie (PSA 9) - $18,500</option>
-                    <option>2011 Topps Update Mike Trout Rookie (BGS 9.5) - $3,200</option>
-                    <option>1952 Topps Jackie Robinson (PSA 6) - $9,800</option>
-                    <option>General Acquisition / Trade Proposition Inquiry</option>
-                </select>
-            </div>
-            <div class="space-y-1.5">
-                <label class="block uppercase tracking-wider text-slate-400">Your Offer Details ($ / Trade Packages) *</label>
-                <textarea rows="5" required placeholder="Outline your price terms or highlight trading credentials..." class="w-full bg-slate-900 border border-slate-800 rounded-lg p-3 text-white focus:outline-none focus:border-amber-500 placeholder-slate-700"></textarea>
-            </div>
-            <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold uppercase tracking-wider py-4 rounded-lg font-sport text-lg transition shadow-lg">
-                Submit Private Offer Securely
-            </button>
-        </form>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold uppercase tracking-wider py-3.5 rounded-md font-sport text-base transition">
+                    Send Order Details
+                </button>
+            </form>
+        </div>
     </section>
 
-    <footer class="bg-black text-slate-500 py-12 px-4 border-t border-slate-900">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-6 text-xs">
-            <div class="flex items-center space-x-2">
-                <span class="inline-block w-2 h-2 rounded-full bg-amber-500"></span>
-                <span class="font-sport text-xl text-white tracking-wider uppercase">Gourmet <span class="text-amber-500">Cards</span></span>
-            </div>
-            <div class="flex space-x-6">
-                <a href="#showcase" class="hover:text-slate-300 transition">Showcase</a>
-                <a href="#about" class="hover:text-slate-300 transition">Authentication</a>
-                <a href="#contact" class="hover:text-slate-300 transition">Terms</a>
-            </div>
-            <div class="text-slate-600 text-[10px]">
-                &copy; 2026 Gourmet Card Co. All images via Unsplash. Built via GitHub Pages.
-            </div>
+    <footer class="bg-black text-slate-600 py-8 px-4 text-center text-xs border-t border-slate-950">
+        <div class="max-w-7xl mx-auto space-y-2">
+            <p class="font-sport text-base text-slate-400 uppercase tracking-widest">The Card Vault • Shop Owner Portal</p>
+            <p class="text-[10px]">All collection card assets managed securely. Managed via GitHub Pages. &copy; 2026.</p>
         </div>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('cardSearch');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const cardItems = document.querySelectorAll('.card-item');
+
+            let currentTeamFilter = 'all';
+            let currentSearchQuery = '';
+
+            function runFilterEngine() {
+                cardItems.forEach(card => {
+                    const cardTeam = card.getAttribute('data-team');
+                    const cardTitle = card.getAttribute('data-title').toLowerCase();
+                    
+                    const matchTeam = (currentTeamFilter === 'all' || cardTeam === currentTeamFilter);
+                    const matchSearch = cardTitle.includes(currentSearchQuery);
+
+                    if (matchTeam && matchSearch) {
+                        card.classList.remove('card-hidden');
+                    } else {
+                        card.classList.add('card-hidden');
+                    }
+                });
+            }
+
+            searchInput.addEventListener('input', (e) => {
+                currentSearchQuery = e.target.value.toLowerCase().trim();
+                runFilterEngine();
+            });
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    filterButtons.forEach(b => {
+                        b.classList.remove('bg-blue-600', 'text-white');
+                        b.classList.add('bg-slate-900', 'text-slate-300');
+                    });
+                    
+                    button.classList.remove('bg-slate-900', 'text-slate-300');
+                    button.classList.add('bg-blue-600', 'text-white');
+
+                    currentTeamFilter = button.getAttribute('data-filter');
+                    runFilterEngine();
+                });
+            });
+        });
+    </script>
 
 </body>
 </html>
 
 ```
-### Steps to swap this out on your GitHub account:
- 1. Open your repository on GitHub.
- 2. Click on your existing index.html file.
- 3. Click the **pencil icon** in the top right corner to edit.
- 4. Select all the old text, delete it, and paste this new code block inside.
- 5. Scroll down to the bottom and click **Commit Changes**.
-Give it 30 seconds, refresh your custom URL, and your trading card portal will be live!
+
